@@ -47,14 +47,20 @@ const SideMenu = ({
                   </button>
                 </div>
                 <div className="flex flex-col w-full place-items-center gap-2 mt-20">
-                  <Link to={""} className="font-semibold">
+                  <Link to={""} className="font-semibold  hover:opacity-50">
                     Posts
                   </Link>
-                  <Link to={""} className="font-semibold">
+                  <Link to={""} className="font-semibold  hover:opacity-50">
                     Archive
                   </Link>
-                  <Link to={""} className="font-semibold">
+                  <Link to={""} className="font-semibold  hover:opacity-50">
                     About
+                  </Link>
+                  <Link
+                    to={""}
+                    className="font-semibold text-accent hover:opacity-50"
+                  >
+                    Edit
                   </Link>
                 </div>
               </div>
