@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState } from "recoil";
-import { themeStateAtom } from "~/recoil/common";
+import { headerFixedStateAtom, themeStateAtom } from "~/recoil/common";
 
 const Header = () => {
   const [theme, setTheme] = useRecoilState(themeStateAtom);
+  const [headerFixed] = useRecoilState(headerFixedStateAtom);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickMenu = () => {
@@ -24,9 +25,13 @@ const Header = () => {
 
   return (
     <>
-      <header className="w-full max-w-[64rem] h-14 flex place-items-center bg-base-100 sm:bg-none fixed md:relative">
+      <header className="w-full max-w-[64rem] h-14 flex place-items-center bg-base-100 sm:bg-none fixed lg:relative">
         <nav className="w-full h-full flex justify-between place-items-center px-4 sm:px-10">
-          <div className="flex justify-end place-items-center fixed">
+          <div
+            className={`flex justify-end place-items-center ${
+              headerFixed && "fixed"
+            }`}
+          >
             <Link
               to={"/"}
               className="hidden sm:block menu-title font-bold text-right text-xl hover:opacity-50"

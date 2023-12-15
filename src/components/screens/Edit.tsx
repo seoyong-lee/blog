@@ -8,9 +8,9 @@ function PageEdit() {
   return (
     <>
       <Head title={"Editor"}></Head>
-      <div className="flex flex-col max-w-[1560px] w-full h-screen px-4 sm:px-10 py-10">
-        <h1 className="text-4xl font-bold">Editor</h1>
-        <div className="w-full py-8">
+      <div className="flex flex-col max-w-[1280px] w-full h-screen px-4 sm:px-10 py-12">
+        <h1 className="text-4xl font-bold text-center">Editor</h1>
+        <div className="w-full py-12">
           <MDEditor
             height={580}
             value={markdownValue}

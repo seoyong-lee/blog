@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { IoIosClose } from "react-icons/io";
 import { Link } from "react-router-dom";
+import ButtonTheme from "./ButtonTheme";
 
 const SideMenu = ({
   isOpen,
@@ -14,7 +15,7 @@ const SideMenu = ({
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed right-0 inset-0 top-0 w-screen"
+        className="fixed right-0 inset-0 top-0 w-screen h-screen"
         open={isOpen}
         onClose={onClickMenu}
       >
@@ -46,22 +47,36 @@ const SideMenu = ({
                     <IoIosClose className="w-10 h-10" />
                   </button>
                 </div>
-                <div className="flex flex-col w-full place-items-center gap-2 mt-20">
-                  <Link to={""} className="font-semibold  hover:opacity-50">
+                <div className="flex flex-col w-full place-items-center gap-3 mt-20">
+                  <Link
+                    to={"/"}
+                    onClick={onClickMenu}
+                    className="text-2xl font-semibold  hover:opacity-50"
+                  >
                     Posts
                   </Link>
-                  <Link to={""} className="font-semibold  hover:opacity-50">
+                  <Link
+                    to={"/archive"}
+                    onClick={onClickMenu}
+                    className="text-2xl font-semibold  hover:opacity-50"
+                  >
                     Archive
                   </Link>
-                  <Link to={""} className="font-semibold  hover:opacity-50">
+                  <Link
+                    to={"/about"}
+                    onClick={onClickMenu}
+                    className="text-2xl font-semibold  hover:opacity-50"
+                  >
                     About
                   </Link>
                   <Link
-                    to={""}
-                    className="font-semibold text-accent hover:opacity-50"
+                    to={"/edit"}
+                    onClick={onClickMenu}
+                    className="text-2xl font-semibold text-accent hover:opacity-50"
                   >
                     Edit
                   </Link>
+                  <ButtonTheme />
                 </div>
               </div>
             </Transition.Child>
