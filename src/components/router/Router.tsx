@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Fragment, lazy, Suspense } from "react";
 import {
   Outlet,
   RouteObject,
@@ -6,20 +6,17 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import Header from "../shared/Header";
-
-const Loading = () => (
-  <p className="p-4 w-full h-full text-center">Loading...</p>
-);
+import Loading from "../shared/Loading";
 
 const IndexScreen = lazy(() => import("~/components/screens/Index"));
 const Page404Screen = lazy(() => import("~/components/screens/404"));
 
 function Layout() {
   return (
-    <main>
+    <Fragment>
       <Header />
       <Outlet />
-    </main>
+    </Fragment>
   );
 }
 
@@ -49,9 +46,5 @@ const InnerRouter = () => {
     },
   ];
   const element = useRoutes(routes);
-  return (
-    <div>
-      <Suspense fallback={<Loading />}>{element}</Suspense>
-    </div>
-  );
+  return <Suspense fallback={<Loading />}>{element}</Suspense>;
 };
