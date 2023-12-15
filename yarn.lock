@@ -1892,6 +1892,11 @@ cz-conventional-emoji@^1.0.2:
   optionalDependencies:
     "@commitlint/load" ">6.1.1"
 
+cz-git@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/cz-git/-/cz-git-1.8.0.tgz#d8566ae4b8848f04b7368e4a24dc0a465fc98dcd"
+  integrity sha512-XL5nXiqbW10YswQqWODrbwyWhydw3mLhP8OBrXyl8u4sIjTf/6mhGsizd6FA2VgPc4tZaNGguFoUyDj7vIBouw==
+
 daisyui@^2.52.0:
   version "2.52.0"
   resolved "https://registry.yarnpkg.com/daisyui/-/daisyui-2.52.0.tgz#1e22abd655bf4a5cb466e1a1f264bb597e9ec254"
