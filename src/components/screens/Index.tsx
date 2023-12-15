@@ -15,7 +15,7 @@ function Index() {
 
   return (
     <Fragment>
-      <Head title="MAIN" />
+      <Head title="Posts" />
       <PostsMain />
     </Fragment>
   );

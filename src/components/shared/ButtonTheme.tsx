@@ -45,7 +45,7 @@ const ButtonTheme = () => {
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
             value="default"
-            onClick={() => setTheme("dark")}
+            onClick={() => setTheme("night")}
           >
             Default
           </button>
@@ -62,28 +62,19 @@ const ButtonTheme = () => {
         <li>
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="aqua"
-            onClick={() => setTheme("aqua")}
+            value="light"
+            onClick={() => setTheme("light")}
           >
-            Aqua
+            light
           </button>
         </li>
         <li>
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="winter"
-            onClick={() => setTheme("winter")}
+            value="dark"
+            onClick={() => setTheme("dark")}
           >
-            Winter
-          </button>
-        </li>
-        <li>
-          <button
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="night"
-            onClick={() => setTheme("night")}
-          >
-            Night
+            dark
           </button>
         </li>
         <li>
@@ -93,6 +84,15 @@ const ButtonTheme = () => {
             onClick={() => setTheme("forest")}
           >
             Forest
+          </button>
+        </li>
+        <li>
+          <button
+            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+            value="luxury"
+            onClick={() => setTheme("luxury")}
+          >
+            Luxury
           </button>
         </li>
       </ul>
