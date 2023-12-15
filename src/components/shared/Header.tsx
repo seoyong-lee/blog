@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineMenu } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useRoutes } from "react-router-dom";
 import SideMenu from "./SideMenu";
 
 const Header = () => {
@@ -70,17 +70,17 @@ const Header = () => {
           </div>
           <div className="flex justify-end w-full">
             <div className="hidden sm:flex  w-full justify-end sm:gap-5 gap-2">
-              <Link to={""} className="font-semibold hover:opacity-50">
+              <Link to={"/"} className="font-semibold hover:opacity-50">
                 Posts
               </Link>
-              <Link to={""} className="font-semibold hover:opacity-50">
+              <Link to={"/archive"} className="font-semibold hover:opacity-50">
                 Archive
               </Link>
-              <Link to={""} className="font-semibold hover:opacity-50">
+              <Link to={"/about"} className="font-semibold hover:opacity-50">
                 About
               </Link>
               <Link
-                to={""}
+                to={"/edit"}
                 className="font-semibold text-accent hover:text-accent-focus"
               >
                 Edit

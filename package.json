@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",
+    "@uiw/react-md-editor": "^4.0.1",
     "daisyui": "^2.52.0",
     "firebase": "^9.23.0",
     "react": "^18.2.0",

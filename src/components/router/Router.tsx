@@ -4,6 +4,7 @@ import Loading from "../shared/Loading";
 import Layout from "../shared/Layout";
 
 const IndexScreen = lazy(() => import("~/components/screens/Index"));
+const PageEditScreen = lazy(() => import("~/components/screens/Edit"));
 const Page404Screen = lazy(() => import("~/components/screens/404"));
 
 export const Router = () => {
@@ -27,6 +28,10 @@ const InnerRouter = () => {
         {
           path: "*",
           element: <Page404Screen />,
+        },
+        {
+          path: "/edit",
+          element: <PageEditScreen />,
         },
       ],
     },
