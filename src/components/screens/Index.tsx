@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { useAuthState } from "~/components/contexts/UserContext";
 import { Head } from "~/components/shared/Head";
-import Footer from "../shared/Footer";
+
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import PostsMain from "../domain/posts/PostsMain";
 
 function Index() {
   const { state } = useAuthState();
@@ -13,13 +14,10 @@ function Index() {
   const markdown = `Just a link: www.nasa.gov.`;
 
   return (
-    <>
+    <Fragment>
       <Head title="MAIN" />
-      <div className="hero min-h-screen">
-        <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown>
-      </div>
-      <Footer />
-    </>
+      <PostsMain />
+    </Fragment>
   );
 }
 

@@ -5,6 +5,7 @@ module.exports = {
     safeList: [],
     content: ["./index.html", "./src/**/*.tsx", "./src/**/*.ts"],
   },
+  darkMode: "class",
   theme: {
     minWidth: {
       40: "10rem",
@@ -17,10 +18,17 @@ module.exports = {
       160: "40rem",
       200: "50rem",
     },
+    screens: {
+      sm: "575px",
+      md: "768px",
+      lg: "990px",
+      xl: "1200px",
+      "2xl": "1536px",
+    },
   },
   variants: {},
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["dark"],
+    themes: ["light", "dark"],
   },
 };

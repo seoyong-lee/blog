@@ -1,24 +1,10 @@
-import { Fragment, lazy, Suspense } from "react";
-import {
-  Outlet,
-  RouteObject,
-  useRoutes,
-  BrowserRouter,
-} from "react-router-dom";
-import Header from "../shared/Header";
+import { lazy, Suspense } from "react";
+import { RouteObject, useRoutes, BrowserRouter } from "react-router-dom";
 import Loading from "../shared/Loading";
+import Layout from "../shared/Layout";
 
 const IndexScreen = lazy(() => import("~/components/screens/Index"));
 const Page404Screen = lazy(() => import("~/components/screens/404"));
-
-function Layout() {
-  return (
-    <Fragment>
-      <Header />
-      <Outlet />
-    </Fragment>
-  );
-}
 
 export const Router = () => {
   return (
@@ -46,5 +32,6 @@ const InnerRouter = () => {
     },
   ];
   const element = useRoutes(routes);
+
   return <Suspense fallback={<Loading />}>{element}</Suspense>;
 };
