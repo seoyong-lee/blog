@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
-import { MdOutlineLightMode } from "react-icons/md";
-import { MdOutlineDarkMode } from "react-icons/md";
+import { useState } from "react";
 import { MdOutlineMenu } from "react-icons/md";
-import { Link, useRoutes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState } from "recoil";
@@ -26,7 +24,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="w-full h-14 flex place-items-center">
+      <header className="w-full max-w-[64rem] h-14 flex place-items-center bg-base-100 sm:bg-none fixed md:relative">
         <nav className="w-full h-full flex justify-between place-items-center px-4 sm:px-10">
           <div className="flex justify-end place-items-center fixed">
             <Link
@@ -92,7 +90,7 @@ const Header = () => {
               <ButtonTheme />
             </div>
             <MdOutlineMenu
-              className="sm:hidden w-6 h-6 cursor-pointer"
+              className="sm:hidden fixed top-[1rem] right-4 w-6 h-6 cursor-pointer"
               onClick={handleClickMenu}
             />
           </div>
