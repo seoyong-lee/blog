@@ -1,3 +1,3 @@
 {
-  "rewrites": [{ "source": "/client/(.*)", "destination": "/" }]
+  "outputDirectory": "dist/client"
 }
