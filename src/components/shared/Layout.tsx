@@ -14,6 +14,10 @@ const Layout = () => {
       return;
     }
 
+    if (typeof window === "undefined") {
+      return;
+    }
+
     localStorage.setItem("theme", theme);
 
     const localTheme = localStorage.getItem("theme");

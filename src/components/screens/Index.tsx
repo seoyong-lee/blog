@@ -4,7 +4,7 @@ import { Head } from "~/components/shared/Head";
 
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import PostsMain from "../domain/posts/PostsMain";
+import PostsMain from "~/components/domain/posts/PostsMain";
 
 function Index() {
   const { state } = useAuthState();

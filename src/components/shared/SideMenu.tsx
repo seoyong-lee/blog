@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { IoIosClose } from "react-icons/io";
+import { IoIosClose } from "@react-icons/all-files/io/IoIosClose";
 import { Link } from "react-router-dom";
 import ButtonTheme from "./ButtonTheme";
 

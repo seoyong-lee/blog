@@ -3,9 +3,9 @@ import { RouteObject, useRoutes, BrowserRouter } from "react-router-dom";
 import Loading from "../shared/Loading";
 import Layout from "../shared/Layout";
 
-const IndexScreen = lazy(() => import("~/components/screens/Index"));
-const PageEditScreen = lazy(() => import("~/components/screens/Edit"));
-const Page404Screen = lazy(() => import("~/components/screens/404"));
+const IndexScreen = lazy(() => import("../screens/Index"));
+const PageEditScreen = lazy(() => import("../screens/Edit"));
+const Page404Screen = lazy(() => import("../screens/404"));
 
 export const Router = () => {
   return (

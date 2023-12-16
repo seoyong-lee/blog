@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdOutlineMenu } from "react-icons/md";
+import { MdMenu } from "@react-icons/all-files/md/MdMenu";
 import { Link } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
@@ -94,7 +94,7 @@ const Header = () => {
               </Link>
               <ButtonTheme />
             </div>
-            <MdOutlineMenu
+            <MdMenu
               className="sm:hidden fixed top-[1rem] right-4 w-6 h-6 cursor-pointer"
               onClick={handleClickMenu}
             />

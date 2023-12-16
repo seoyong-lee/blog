@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import { Router } from "~/components/router/Router";
-// import { setupFirebase } from "~/lib/firebase";
+// import { setupFirebase } from "./lib/firebase";
 // import { useEffect } from "react";
 // import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { useSignIn, useSignOut } from "~/components/contexts/UserContext";
+// import { useSignIn, useSignOut } from "./components/contexts/UserContext";
 
 function Main() {
   // const { signIn } = useSignIn();
@@ -20,8 +21,13 @@ function Main() {
   //     }
   //   });
   // }, []);
+  const [domLoaded, setDomLoaded] = useState(false);
 
-  return <Router />;
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
+  return <>{domLoaded && <Router />}</>;
 }
 
 export default Main;
