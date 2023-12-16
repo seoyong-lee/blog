@@ -25,8 +25,8 @@ const Header = () => {
 
   return (
     <>
-      <header className="w-full max-w-[64rem] h-14 flex place-items-center bg-base-100 sm:bg-none fixed lg:relative">
-        <nav className="w-full h-full flex justify-between place-items-center px-4 sm:px-10">
+      <header className="w-full max-w-[64rem] h-14 flex place-items-center bg-base-100 sm:bg-none fixed lg:relative z-10">
+        <nav className="w-full h-full flex justify-between place-items-center px-6 sm:px-10">
           <div
             className={`flex justify-end place-items-center ${
               headerFixed && "fixed"
