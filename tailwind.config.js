@@ -29,6 +29,6 @@ module.exports = {
   variants: {},
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["forest", "night", "luxury", "winter", "black", "light", "dark"],
+    themes: ["forest", "night", "winter", "black", "light", "sunset", "nord"],
   },
 };

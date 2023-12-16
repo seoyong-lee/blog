@@ -15,7 +15,7 @@ const SideMenu = ({
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed right-0 inset-0 top-0 w-screen h-screen"
+        className="fixed right-0 inset-0 top-0 w-screen h-screen z-20"
         open={isOpen}
         onClose={onClickMenu}
       >
@@ -28,7 +28,7 @@ const SideMenu = ({
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >
-          <Dialog.Panel className="pointer-events-auto w-screen h-screen bg-base-300">
+          <Dialog.Panel className="pointer-events-auto w-screen h-screen bg-base-300 overflow-hidden">
             <Transition.Child
               enter="transition duration-500 ease-out delay-300"
               enterFrom="transform scale-95 opacity-0"

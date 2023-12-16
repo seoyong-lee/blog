@@ -34,13 +34,13 @@ const Header = () => {
           >
             <Link
               to={"/"}
-              className="hidden sm:block menu-title font-bold text-right text-xl hover:opacity-50"
+              className="hidden sm:block  font-bold text-right text-xl hover:opacity-50"
             >
               Drew.log
             </Link>
             <Link
               to={"/"}
-              className="block sm:hidden menu-title font-bold text-right text-xl hover:opacity-50"
+              className="block sm:hidden  font-bold text-right text-xl hover:opacity-50"
             >
               D.log
             </Link>

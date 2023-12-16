@@ -65,16 +65,16 @@ const ButtonTheme = () => {
             value="light"
             onClick={() => setTheme("light")}
           >
-            light
+            Light
           </button>
         </li>
         <li>
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="dark"
-            onClick={() => setTheme("dark")}
+            value="sunset"
+            onClick={() => setTheme("sunset")}
           >
-            dark
+            Sunset
           </button>
         </li>
         <li>
@@ -89,10 +89,10 @@ const ButtonTheme = () => {
         <li>
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="luxury"
-            onClick={() => setTheme("luxury")}
+            value="nord"
+            onClick={() => setTheme("nord")}
           >
-            Luxury
+            Nord
           </button>
         </li>
       </ul>
