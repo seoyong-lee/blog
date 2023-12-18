@@ -31,7 +31,7 @@ const Layout = () => {
 
   return (
     <Theme dataTheme={theme}>
-      <div className="w-full h-full flex flex-col place-items-center">
+      <div className="w-full h-full flex flex-col place-items-center overflow-x-hidden">
         <Header />
         <Outlet />
         <Footer />

@@ -1,8 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="footer w-full footer-center p-6 bg-base-200 text-base-content">
+    <footer className="footer w-full sm:footer-center p-6 bg-base-200 text-base-content ">
       <aside>
-        <p>Copyright © 2023 - All right reserved by Drew Lee</p>
+        <p className="text-[12px] sm:text-base">
+          Copyright © 2023 - All right reserved by Drew Lee
+        </p>
       </aside>
     </footer>
   );
