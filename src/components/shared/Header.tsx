@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigation } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -14,6 +14,7 @@ import { getAuth, signOut } from "firebase/auth";
 
 const Header = () => {
   const auth = getAuth();
+  const location = useLocation();
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [headerFixed] = useRecoilState(headerFixedStateAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
@@ -72,13 +73,15 @@ const Header = () => {
           >
             <Link
               to={"/"}
-              className="hidden sm:block  font-bold text-right text-xl hover:opacity-50"
+              className={
+                "hidden sm:block font-bold text-right text-xl hover:opacity-50"
+              }
             >
               Drew.log
             </Link>
             <Link
               to={"/"}
-              className="block sm:hidden  font-bold text-right text-xl hover:opacity-50"
+              className="block sm:hidden font-bold text-right text-xl hover:opacity-50"
             >
               D.log
             </Link>
@@ -115,17 +118,38 @@ const Header = () => {
           </div>
           <div className="flex justify-end w-full">
             <div className="hidden sm:flex  w-full justify-end sm:gap-5 gap-2">
-              <Link to={"/"} className="font-semibold hover:opacity-50">
+              <Link
+                to={"/"}
+                className={`font-semibold hover:opacity-50 ${
+                  location.pathname === "/" && "border-b-2"
+                }`}
+              >
                 Posts
               </Link>
-              <Link to={"/archive"} className="font-semibold hover:opacity-50">
+              <Link
+                to={"/archive"}
+                className={`font-semibold hover:opacity-50 ${
+                  location.pathname === "/archive" && "border-b-2"
+                }`}
+              >
                 Archive
               </Link>
-              <Link to={"/about"} className="font-semibold hover:opacity-50">
+              <Link
+                to={"/about"}
+                className={`font-semibold hover:opacity-50 ${
+                  location.pathname === "/about" && "border-b-2"
+                }`}
+              >
                 About
               </Link>
               {showLoginButton && (
-                <Link to={"/login"} className="font-semibold text-primary">
+                <Link
+                  to={"/login"}
+                  className={`text-primary font-semibold hover:opacity-50 ${
+                    location.pathname === "/login" &&
+                    "border-b-2 border-primary"
+                  }`}
+                >
                   Login
                 </Link>
               )}
