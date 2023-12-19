@@ -3,14 +3,16 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
+import TitleHeader from "../shared/TitleHeader";
 
 function PageAbout() {
   return (
     <>
       <Head title={"About"}></Head>
       <div className="flex flex-col max-w-[780px] w-full h-screen px-6 sm:px-10 lg:py-0 pt-12">
-        <div className="flex flex-col sm:flex-row mt-16 place-items-center">
-          <div className="avatar w-[150px] h-[150px] rounded-full mb-4 sm:mb-0 overflow-hidden">
+        <TitleHeader title={"About"} />
+        <div className="flex flex-col sm:flex-row mt-10 place-items-center">
+          <div className="avatar w-[150px] h-[150px] rounded-full mb-10 sm:mb-0 overflow-hidden">
             <img
               src="/me.png"
               width={150}

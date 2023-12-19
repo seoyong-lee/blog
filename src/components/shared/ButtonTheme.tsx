@@ -7,7 +7,7 @@ const ButtonTheme = ({ onClickAdmin }: { onClickAdmin: () => void }) => {
   return (
     <div className="dropdown">
       <div className="sm:hidden collapse flex flex-col place-items-center">
-        <div className="text-center text-xl font-semibold mt-8">Theme</div>
+        <div className="text-center text-xl font-semibold mt-1">Theme</div>
         <svg
           width="12px"
           height="12px"

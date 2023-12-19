@@ -6,6 +6,7 @@ import Layout from "../shared/Layout";
 const IndexScreen = lazy(() => import("../screens/Index"));
 const PageArchiveScreen = lazy(() => import("../screens/Archive"));
 const PageAboutScreen = lazy(() => import("../screens/About"));
+const PageLoginScreen = lazy(() => import("../screens/Login"));
 const PageEditScreen = lazy(() => import("../screens/Edit"));
 const Page404Screen = lazy(() => import("../screens/404"));
 
@@ -42,6 +43,10 @@ const InnerRouter = () => {
         {
           path: "/about",
           element: <PageAboutScreen />,
+        },
+        {
+          path: "/login",
+          element: <PageLoginScreen />,
         },
       ],
     },

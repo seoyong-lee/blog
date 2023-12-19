@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { headerFixedStateAtom, isLoginStateAtom, themeStateAtom } from "~/recoil/common";
+import {
+  headerFixedStateAtom,
+  isLoginStateAtom,
+  themeStateAtom,
+} from "~/recoil/common";
 import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { getAuth, signOut } from "firebase/auth";
 
 const Header = () => {
+  const auth = getAuth();
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [headerFixed] = useRecoilState(headerFixedStateAtom);
-  const [isLogin] = useRecoilState(isLoginStateAtom)
+  const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
 
   const setIsShowToast = useSetRecoilState(showToastStateAtom);
   const setToastText = useSetRecoilState(toastTextStateAtom);
@@ -21,6 +27,17 @@ const Header = () => {
 
   const handleClickMenu = () => {
     setIsOpen((prev) => !prev);
+  };
+
+  const handleClickLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("logout");
+        setIsLogin(false);
+      })
+      .catch((error) => {
+        // An error happened.
+      });
   };
 
   const handleClickDarkmode = () => {
@@ -108,7 +125,7 @@ const Header = () => {
                 About
               </Link>
               {showLoginButton && (
-                <Link to={""} className="font-semibold text-primary">
+                <Link to={"/login"} className="font-semibold text-primary">
                   Login
                 </Link>
               )}
@@ -118,6 +135,15 @@ const Header = () => {
                   className="font-semibold text-accent hover:text-accent-focus"
                 >
                   Edit
+                </Link>
+              )}
+              {isLogin && (
+                <Link
+                  to=""
+                  className="font-semibold text-accent hover:text-accent-focus"
+                  onClick={handleClickLogout}
+                >
+                  Logout
                 </Link>
               )}
               <ButtonTheme onClickAdmin={handleClickAdmin} />

@@ -79,7 +79,7 @@ const SideMenu = ({
                   </Link>
                   {showLoginButton && (
                     <Link
-                      to={""}
+                      to={"/login"}
                       className="text-2xl font-semibold text-primary hover:opacity-50"
                     >
                       Login
