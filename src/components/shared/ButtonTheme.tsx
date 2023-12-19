@@ -1,7 +1,7 @@
 import { useSetRecoilState } from "recoil";
 import { themeStateAtom } from "~/recoil/common";
 
-const ButtonTheme = () => {
+const ButtonTheme = ({ onClickAdmin }: { onClickAdmin: () => void }) => {
   const setTheme = useSetRecoilState(themeStateAtom);
 
   return (
@@ -45,7 +45,10 @@ const ButtonTheme = () => {
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
             value="default"
-            onClick={() => setTheme("night")}
+            onClick={() => {
+              setTheme("night");
+              onClickAdmin();
+            }}
           >
             Default
           </button>

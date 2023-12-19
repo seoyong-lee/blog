@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 
-const PostItem = () => {
+const PostItem = ({
+  onClickProfile,
+}: {
+  onClickProfile: (author: string) => () => void;
+}) => {
   return (
-    <Link to="">
+    <Link to="" onClick={(e) => e.preventDefault()}>
       <div className="card card-compact bg-base-100 shadow-xl cursor-pointer hover:bg-base-200">
         <figure>
           <img
@@ -21,19 +25,20 @@ const PostItem = () => {
           </p>
           <br />
           <div className="flex gap-9 place-items-center">
-            <Link to="/about">
-              <div className="flex place-items-center">
-                <div className="avatar mr-3">
-                  <div className="w-12 rounded-full overflow-hidden">
-                    <img src="me.png" alt="avatar" className="object-contain" />
-                  </div>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-bold">Author</span>
-                  <span>Drew Lee</span>
+            <div
+              className="flex place-items-center cursor-pointer"
+              onClick={onClickProfile("me")}
+            >
+              <div className="avatar mr-3">
+                <div className="w-12 rounded-full overflow-hidden">
+                  <img src="me.png" alt="avatar" className="object-contain" />
                 </div>
               </div>
-            </Link>
+              <div className="flex flex-col">
+                <span className="font-bold">Author</span>
+                <span>Drew Lee</span>
+              </div>
+            </div>
             <div className="flex flex-col">
               <span className="font-bold">Date</span>
               <span>October 24, 2023</span>

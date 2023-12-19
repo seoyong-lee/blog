@@ -2,9 +2,10 @@ import { lazy, Suspense } from "react";
 import { RouteObject, useRoutes, BrowserRouter } from "react-router-dom";
 import Loading from "../shared/Loading";
 import Layout from "../shared/Layout";
-import PageAbout from "../screens/About";
 
 const IndexScreen = lazy(() => import("../screens/Index"));
+const PageArchiveScreen = lazy(() => import("../screens/Archive"));
+const PageAboutScreen = lazy(() => import("../screens/About"));
 const PageEditScreen = lazy(() => import("../screens/Edit"));
 const Page404Screen = lazy(() => import("../screens/404"));
 
@@ -35,8 +36,12 @@ const InnerRouter = () => {
           element: <PageEditScreen />,
         },
         {
+          path: "/archive",
+          element: <PageArchiveScreen />,
+        },
+        {
           path: "/about",
-          element: <PageAbout />,
+          element: <PageAboutScreen />,
         },
       ],
     },

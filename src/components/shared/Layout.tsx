@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import { useEffect } from "react";
 import { themeStateAtom } from "~/recoil/common";
 import { useRecoilState } from "recoil";
+import Toast from "./Toast";
 
 const Layout = () => {
   const [theme] = useRecoilState(themeStateAtom);
@@ -35,6 +36,7 @@ const Layout = () => {
         <Header />
         <Outlet />
         <Footer />
+        <Toast />
       </div>
     </Theme>
   );

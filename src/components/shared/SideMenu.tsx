@@ -3,14 +3,22 @@ import { Dialog, Transition } from "@headlessui/react";
 import { IoIosClose } from "@react-icons/all-files/io/IoIosClose";
 import { Link } from "react-router-dom";
 import ButtonTheme from "./ButtonTheme";
+import { useRecoilState } from "recoil";
+import { isLoginStateAtom } from "~/recoil/common";
 
 const SideMenu = ({
   isOpen,
+  showLoginButton,
   onClickMenu,
+  onClickAdmin,
 }: {
   isOpen: boolean;
+  showLoginButton: boolean;
   onClickMenu: () => void;
+  onClickAdmin: () => void;
 }) => {
+  const [isLogin] = useRecoilState(isLoginStateAtom);
+
   return (
     <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
@@ -69,14 +77,24 @@ const SideMenu = ({
                   >
                     About
                   </Link>
-                  <Link
-                    to={"/edit"}
-                    onClick={onClickMenu}
-                    className="text-2xl font-semibold text-accent hover:opacity-50"
-                  >
-                    Edit
-                  </Link>
-                  <ButtonTheme />
+                  {showLoginButton && (
+                    <Link
+                      to={""}
+                      className="text-2xl font-semibold text-primary hover:opacity-50"
+                    >
+                      Login
+                    </Link>
+                  )}
+                  {isLogin && (
+                    <Link
+                      to={"/edit"}
+                      onClick={onClickMenu}
+                      className="text-2xl font-semibold text-accent hover:opacity-50"
+                    >
+                      Edit
+                    </Link>
+                  )}
+                  <ButtonTheme onClickAdmin={onClickAdmin} />
                 </div>
               </div>
             </Transition.Child>

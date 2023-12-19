@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
 import { Link } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
-import { useRecoilState } from "recoil";
-import { headerFixedStateAtom, themeStateAtom } from "~/recoil/common";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { headerFixedStateAtom, isLoginStateAtom, themeStateAtom } from "~/recoil/common";
+import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
 
 const Header = () => {
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [headerFixed] = useRecoilState(headerFixedStateAtom);
+  const [isLogin] = useRecoilState(isLoginStateAtom)
+
+  const setIsShowToast = useSetRecoilState(showToastStateAtom);
+  const setToastText = useSetRecoilState(toastTextStateAtom);
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const [showLoginCount, setShowLoginCount] = useState(0);
 
   const handleClickMenu = () => {
     setIsOpen((prev) => !prev);
@@ -22,6 +30,19 @@ const Header = () => {
       setTheme("night");
     }
   };
+
+  const handleClickAdmin = () => {
+    setShowLoginCount((prev) => prev + 1);
+  };
+
+  const showLoginButton = showLoginCount >= 5;
+
+  useEffect(() => {
+    if (showLoginButton) {
+      setIsShowToast(true);
+      setToastText("관리자 모드 활성화!");
+    }
+  }, [showLoginButton]);
 
   return (
     <>
@@ -86,13 +107,20 @@ const Header = () => {
               <Link to={"/about"} className="font-semibold hover:opacity-50">
                 About
               </Link>
-              <Link
-                to={"/edit"}
-                className="font-semibold text-accent hover:text-accent-focus"
-              >
-                Edit
-              </Link>
-              <ButtonTheme />
+              {showLoginButton && (
+                <Link to={""} className="font-semibold text-primary">
+                  Login
+                </Link>
+              )}
+              {isLogin && (
+                <Link
+                  to={"/edit"}
+                  className="font-semibold text-accent hover:text-accent-focus"
+                >
+                  Edit
+                </Link>
+              )}
+              <ButtonTheme onClickAdmin={handleClickAdmin} />
             </div>
             <MdMenu
               className="sm:hidden fixed top-[1rem] right-4 w-6 h-6 cursor-pointer"
@@ -101,7 +129,12 @@ const Header = () => {
           </div>
         </nav>
       </header>
-      <SideMenu onClickMenu={handleClickMenu} isOpen={isOpen} />
+      <SideMenu
+        onClickMenu={handleClickMenu}
+        onClickAdmin={handleClickAdmin}
+        isOpen={isOpen}
+        showLoginButton={showLoginButton}
+      />
     </>
   );
 };

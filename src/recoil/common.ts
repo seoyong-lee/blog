@@ -10,3 +10,8 @@ export const headerFixedStateAtom = atom<boolean>({
   key: "headerFixedStateAtom",
   default: false,
 });
+
+export const isLoginStateAtom = atom<boolean>({
+  key: "isLoginStateAtom",
+  default: false,
+});
