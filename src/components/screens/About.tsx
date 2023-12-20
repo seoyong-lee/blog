@@ -14,7 +14,7 @@ function PageAbout() {
         <div className="flex flex-col sm:flex-row mt-14 place-items-center">
           <div className="avatar w-[150px] h-[150px] rounded-full mb-10 sm:mb-0 overflow-hidden">
             <img
-              src="/me.png"
+              src="/me.jpg"
               width={150}
               height={150}
               alt="me"
