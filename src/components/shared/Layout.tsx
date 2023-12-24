@@ -2,10 +2,11 @@ import { Theme } from "react-daisyui";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { themeStateAtom } from "~/recoil/common";
 import { useRecoilState } from "recoil";
 import Toast from "./Toast";
+import Loading from "./Loading";
 
 const Layout = () => {
   const [theme] = useRecoilState(themeStateAtom);
@@ -34,7 +35,9 @@ const Layout = () => {
     <Theme dataTheme={theme}>
       <div className="w-full h-full flex flex-col place-items-center overflow-x-hidden">
         <Header />
-        <Outlet />
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
         <Footer />
         <Toast />
       </div>

@@ -26,6 +26,5 @@
       "~/*": ["./*"]
     }
   },
-  "include": ["src", "postcss.config.cjs", "server.js"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "postcss.config.cjs"]
 }

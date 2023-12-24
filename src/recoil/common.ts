@@ -3,7 +3,9 @@ import { atom } from "recoil";
 export const themeStateAtom = atom<string>({
   key: "themeStateAtom",
   default:
-    typeof window !== "undefined" ? localStorage.getItem("theme") : "night",
+    typeof window !== "undefined"
+      ? localStorage.getItem("theme") ?? "night"
+      : "night",
 });
 
 export const headerFixedStateAtom = atom<boolean>({
