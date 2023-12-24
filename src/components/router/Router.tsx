@@ -4,6 +4,7 @@ import Loading from "../shared/Loading";
 import Layout from "../shared/Layout";
 
 const IndexScreen = lazy(() => import("../screens/Index"));
+const PagePostDetail = lazy(() => import("../screens/PostDetail"));
 const PageArchiveScreen = lazy(() => import("../screens/Archive"));
 const PageAboutScreen = lazy(() => import("../screens/About"));
 const PageLoginScreen = lazy(() => import("../screens/Login"));
@@ -47,6 +48,16 @@ const InnerRouter = () => {
         {
           path: "/login",
           element: <PageLoginScreen />,
+        },
+        {
+          path: "/post",
+          element: <PagePostDetail />,
+          children: [
+            {
+              path: "/post/:postId",
+              element: <PagePostDetail />,
+            },
+          ],
         },
       ],
     },
