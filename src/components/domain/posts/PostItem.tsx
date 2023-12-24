@@ -7,7 +7,6 @@ const PostItem = ({
 }) => {
   return (
     <a
-      href=""
       onClick={(e) => {
         e.preventDefault();
         onClick();
