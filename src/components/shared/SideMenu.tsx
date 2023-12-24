@@ -4,7 +4,7 @@ import { IoIosClose } from "@react-icons/all-files/io/IoIosClose";
 import { Link } from "react-router-dom";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState } from "recoil";
-import { isLoginStateAtom } from "~/recoil/common";
+import { isLoginStateAtom } from "~/recoil/user";
 
 const SideMenu = ({
   isOpen,

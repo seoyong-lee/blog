@@ -1,17 +1,40 @@
-import { Fragment, useRef, useState } from "react";
-import { useAuthState } from "~/components/contexts/UserContext";
+import { Fragment, useEffect } from "react";
 import { Head } from "~/components/shared/Head";
 
-import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import PostsMain from "~/components/domain/posts/PostsMain";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { useFirestore } from "~/lib/firebase";
+import { isLoginStateAtom, currentUserAtom } from "~/recoil/user";
+import { getUser } from "~/services/auth";
 
 function Index() {
-  const { state } = useAuthState();
-  const [isOpen, setIsOpen] = useState(true);
-  const completeButtonRef = useRef(null);
+  const db = useFirestore();
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
+  const setUser = useSetRecoilState(currentUserAtom);
 
-  const markdown = `Just a link: www.nasa.gov.`;
+  useEffect(() => {
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, async (user) => {
+      console.log(user);
+
+      if (!user) {
+        return;
+      }
+
+      const userData = await getUser(db, user.uid);
+
+      if (!isLogin && userData) {
+        console.log("user data: ", userData);
+        setIsLogin(true);
+        setUser(userData);
+        navigate("/");
+      }
+    });
+  }, []);
 
   return (
     <Fragment>

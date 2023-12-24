@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdMenu } from "@react-icons/all-files/md/MdMenu";
-import { Link, useLocation, useNavigation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import {
-  headerFixedStateAtom,
-  isLoginStateAtom,
-  themeStateAtom,
-} from "~/recoil/common";
+import { headerFixedStateAtom, themeStateAtom } from "~/recoil/common";
 import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
 import { getAuth, signOut } from "firebase/auth";
+import { isLoginStateAtom } from "~/recoil/user";
 
 const Header = () => {
   const auth = getAuth();
@@ -53,7 +50,7 @@ const Header = () => {
     setShowLoginCount((prev) => prev + 1);
   };
 
-  const showLoginButton = showLoginCount >= 5;
+  const showLoginButton = showLoginCount >= 5 && !isLogin;
 
   useEffect(() => {
     if (showLoginButton) {
