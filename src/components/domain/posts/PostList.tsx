@@ -4,16 +4,20 @@ import PostItem from "./PostItem";
 const PostList = () => {
   const navigate = useNavigate();
 
-  const handleClickProfile = (author: string) => () => {
+  const handleClickProfile = (author: string) => {
     if (author === "me") {
       navigate("/about");
     }
   };
 
+  const handleClickItem = () => {
+    navigate("/post/1234");
+  };
+
   return (
     <div className="flex flex-col md:grid sm:grid-cols-2 gap-10 py-8 h-full">
-      <PostItem onClickProfile={handleClickProfile} />
-      <PostItem onClickProfile={handleClickProfile} />
+      <PostItem onClickProfile={handleClickProfile} onClick={handleClickItem} />
+      <PostItem onClickProfile={handleClickProfile} onClick={handleClickItem} />
     </div>
   );
 };

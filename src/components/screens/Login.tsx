@@ -1,22 +1,26 @@
 import { Head } from "~/components/shared/Head";
 import TitleHeader from "../shared/TitleHeader";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const provider = new GoogleAuthProvider();
 
 function PageLogin() {
   const auth = getAuth();
+  const navigate = useNavigate();
 
   const handleClickGoogleLogin = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
+        const token = credential?.accessToken;
         // The signed-in user info.
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
+
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -1,8 +1,17 @@
 import { Head } from "~/components/shared/Head";
 
 import SocialButtons from "../domain/about/SocialButtons";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { headerFixedStateAtom } from "~/recoil/common";
 
 function PageAbout() {
+  const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
+
+  useEffect(() => {
+    setHeaderFixed(false);
+  }, []);
+
   return (
     <>
       <Head title={"About"}></Head>

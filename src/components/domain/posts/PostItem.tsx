@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
-
 const PostItem = ({
   onClickProfile,
+  onClick,
 }: {
-  onClickProfile: (author: string) => () => void;
+  onClickProfile: (author: string) => void;
+  onClick: () => void;
 }) => {
   return (
-    <Link to="" onClick={(e) => e.preventDefault()}>
+    <a
+      href=""
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+    >
       <div className="card card-compact bg-base-100 shadow-xl cursor-pointer hover:bg-base-200">
         <figure>
           <img
@@ -25,9 +31,12 @@ const PostItem = ({
           </p>
           <br />
           <div className="flex gap-9 place-items-center">
-            <div
+            <button
               className="flex place-items-center cursor-pointer"
-              onClick={onClickProfile("me")}
+              onClick={(e) => {
+                e.stopPropagation();
+                onClickProfile("me");
+              }}
             >
               <div className="avatar mr-3">
                 <div className="w-12 rounded-full overflow-hidden">
@@ -35,10 +44,10 @@ const PostItem = ({
                 </div>
               </div>
               <div className="flex flex-col">
-                <span className="font-bold">Author</span>
+                <span className="font-bold text-left">Author</span>
                 <span>Drew Lee</span>
               </div>
-            </div>
+            </button>
             <div className="flex flex-col">
               <span className="font-bold">Date</span>
               <span>October 24, 2023</span>
@@ -46,7 +55,7 @@ const PostItem = ({
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

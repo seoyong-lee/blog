@@ -1,8 +1,16 @@
 import { Head } from "~/components/shared/Head";
 import TitleHeader from "../shared/TitleHeader";
-import { Divider } from "react-daisyui";
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { headerFixedStateAtom } from "~/recoil/common";
 
 function PageArchive() {
+  const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
+
+  useEffect(() => {
+    setHeaderFixed(false);
+  }, []);
+
   return (
     <>
       <Head title={"Archive"}></Head>

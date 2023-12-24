@@ -1,6 +1,15 @@
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
 import { Head } from "~/components/shared/Head";
+import { headerFixedStateAtom } from "~/recoil/common";
 
 function Page404() {
+  const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
+
+  useEffect(() => {
+    setHeaderFixed(false);
+  }, []);
+
   return (
     <>
       <Head title={"The page is not found"}></Head>
