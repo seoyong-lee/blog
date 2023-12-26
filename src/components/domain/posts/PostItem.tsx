@@ -16,7 +16,7 @@ const PostItem = ({
         onClick(post.id);
       }}
     >
-      <div className="card card-compact bg-base-200 shadow-xl cursor-pointer hover:bg-base-200">
+      <div className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:bg-base-200">
         <figure className="h-[12rem] sm:h-[14rem] md:h-[15rem] lg:h-[16rem]">
           <img
             src={post?.imgUrl}
@@ -24,11 +24,11 @@ const PostItem = ({
             className="h-full w-full object-cover"
           />
         </figure>
-        <div className="card-body min-h-[15rem]">
-          <h2 className="card-title text-2xl font-bold">{post?.title}</h2>
-          <p className="text-base leading-6">{post?.desc}</p>
+        <div className="card-body min-h-[15rem] mb-2">
+          <h2 className="card-title text-2xl font-bold px-1">{post?.title}</h2>
+          <p className="text-base leading-6 px-1">{post?.desc}</p>
           <br />
-          <div className="flex gap-9 place-items-center">
+          <div className="flex gap-9 place-items-center px-1">
             <button
               className="flex place-items-center cursor-pointer"
               onClick={(e) => {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getPosts } from "~/services/post";
 import { useFirestore } from "~/lib/firebase";
 import { Post } from "~/types/scheme";
+import Loading from "~/components/shared/Loading";
 
 const PostList = () => {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ const PostList = () => {
   useEffect(() => {
     getAndSetPosts();
   }, []);
+
+  if (!posts) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col md:grid sm:grid-cols-2 gap-10 py-8 h-full">
