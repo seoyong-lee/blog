@@ -56,15 +56,6 @@ const ButtonTheme = ({ onClickAdmin }: { onClickAdmin: () => void }) => {
         <li>
           <button
             className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-            value="black"
-            onClick={() => setTheme("black")}
-          >
-            Black
-          </button>
-        </li>
-        <li>
-          <button
-            className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
             value="light"
             onClick={() => setTheme("light")}
           >

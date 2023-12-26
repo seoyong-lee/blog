@@ -38,6 +38,7 @@ const PostList = () => {
       {posts?.map((post) => {
         return (
           <PostItem
+            key={post.id}
             post={post}
             onClickProfile={handleClickProfile}
             onClick={handleClickItem}
