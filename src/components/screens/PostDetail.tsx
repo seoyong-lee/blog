@@ -103,7 +103,7 @@ const PagePostDetail = () => {
               <img
                 src={post?.imgUrl}
                 alt="post main img"
-                className="object-cover md:rounded-xl max-h-[18rem] sm:max-h-[24rem] w-full h-full"
+                className="object-cover md:rounded-xl max-h-[16rem] sm:max-h-[24rem] w-full h-full"
               />
             </picture>
             <figcaption className="mt-4 text-center text-[12px] sm:text-[14px] text-secondary">
