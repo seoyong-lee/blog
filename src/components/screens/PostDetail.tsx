@@ -38,7 +38,6 @@ const PagePostDetail = () => {
       }
 
       const res = await getPost(db, postId);
-      console.log(db);
 
       if (!res) {
         return;
@@ -104,7 +103,7 @@ const PagePostDetail = () => {
               <img
                 src={post?.imgUrl}
                 alt="post main img"
-                className="object-contain md:rounded-xl"
+                className="object-cover md:rounded-xl max-h-[18rem] sm:max-h-[24rem] w-full h-full"
               />
             </picture>
             <figcaption className="mt-4 text-center text-[12px] sm:text-[14px] text-secondary">

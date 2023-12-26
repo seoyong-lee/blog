@@ -17,8 +17,8 @@ const PostList = () => {
     }
   };
 
-  const handleClickItem = () => {
-    navigate("/post/1234");
+  const handleClickItem = (postId: string) => {
+    navigate(`/post/${postId}`);
   };
 
   const getAndSetPosts = async () => {
