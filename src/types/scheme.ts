@@ -16,6 +16,7 @@ export interface Post {
     profileImgUrl?: string;
   };
   deleted: boolean;
+  isPublic?: boolean;
   createdAt: number;
   updatedAt?: number;
 }

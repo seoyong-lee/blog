@@ -9,7 +9,7 @@ import { useFirestore } from "~/lib/firebase";
 import { isLoginStateAtom, currentUserAtom } from "~/recoil/user";
 import { getUser } from "~/services/auth";
 
-import { themeStateAtom } from "~/recoil/common";
+import { showHeaderAtom, themeStateAtom } from "~/recoil/common";
 import Toast from "./Toast";
 import Loading from "./Loading";
 
@@ -18,6 +18,7 @@ const Layout = () => {
   const [user, setUser] = useRecoilState(currentUserAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
   const [theme] = useRecoilState(themeStateAtom);
+  const [showHeader] = useRecoilState(showHeaderAtom);
 
   useEffect(() => {
     if (!theme) {
@@ -59,7 +60,7 @@ const Layout = () => {
   return (
     <Theme dataTheme={theme}>
       <div className="w-full h-full flex flex-col place-items-center overflow-x-hidden">
-        <Header />
+        {showHeader && <Header />}
         <Suspense fallback={<Loading />}>
           <Outlet />
         </Suspense>

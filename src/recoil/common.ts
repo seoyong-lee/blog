@@ -12,3 +12,8 @@ export const headerFixedStateAtom = atom<boolean>({
   key: "headerFixedStateAtom",
   default: false,
 });
+
+export const showHeaderAtom = atom<boolean>({
+  key: "showHeaderAtom",
+  default: true,
+});
