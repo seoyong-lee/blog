@@ -1,8 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import PostItem from "./PostItem";
+import { useEffect, useState } from "react";
+import { getPosts } from "~/services/post";
+import { useFirestore } from "~/lib/firebase";
+import { Post } from "~/types/scheme";
 
 const PostList = () => {
   const navigate = useNavigate();
+  const db = useFirestore();
+
+  const [posts, setPosts] = useState<Post[]>();
 
   const handleClickProfile = (author: string) => {
     if (author === "me") {
@@ -14,10 +21,29 @@ const PostList = () => {
     navigate("/post/1234");
   };
 
+  const getAndSetPosts = async () => {
+    const postList = await getPosts(db);
+    if (!postList) {
+      return;
+    }
+    setPosts(postList);
+  };
+
+  useEffect(() => {
+    getAndSetPosts();
+  }, []);
+
   return (
     <div className="flex flex-col md:grid sm:grid-cols-2 gap-10 py-8 h-full">
-      <PostItem onClickProfile={handleClickProfile} onClick={handleClickItem} />
-      <PostItem onClickProfile={handleClickProfile} onClick={handleClickItem} />
+      {posts?.map((post) => {
+        return (
+          <PostItem
+            post={post}
+            onClickProfile={handleClickProfile}
+            onClick={handleClickItem}
+          />
+        );
+      })}
     </div>
   );
 };
