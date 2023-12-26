@@ -1,9 +1,12 @@
 import MDEditor from "@uiw/react-md-editor";
 import { useState } from "react";
 import { Head } from "~/components/shared/Head";
+import { multilineToSingleline } from "~/utils/markdown";
 
 function PageEdit() {
   const [markdownValue, setMarkdownValue] = useState<string>();
+
+  console.log(multilineToSingleline(markdownValue));
 
   return (
     <>

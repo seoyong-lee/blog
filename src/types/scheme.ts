@@ -9,6 +9,7 @@ export interface Post {
   id: string;
   title: string;
   desc?: string;
+  imgUrl: string;
   text: string;
   author: {
     name: string;
