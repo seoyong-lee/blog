@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { Post } from "~/types/scheme";
 
 const PostItem = ({
@@ -9,6 +10,8 @@ const PostItem = ({
   onClickProfile: (author: string) => void;
   onClick: (postId: string) => void;
 }) => {
+  const date = dayjs(post.createdAt).format("MMMM DD, YYYY");
+
   return (
     <a
       onClick={(e) => {
@@ -48,7 +51,7 @@ const PostItem = ({
             </button>
             <div className="flex flex-col">
               <span className="font-bold">Date</span>
-              <span>October 24, 2023</span>
+              <span>{date}</span>
             </div>
           </div>
         </div>

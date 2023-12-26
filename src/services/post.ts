@@ -21,7 +21,12 @@ export const getPosts = async (db: Firestore) => {
   try {
     const postDoc = await getDocs(collection(db, "Posts"));
     const res: Post[] = [];
-    postDoc.forEach((doc) => res.push(doc.data() as Post));
+    postDoc.forEach((doc) => {
+      const docData = doc.data() as Post;
+      if (!docData?.deleted) {
+        res.push(docData);
+      }
+    });
     return res;
   } catch (e) {
     throw e;

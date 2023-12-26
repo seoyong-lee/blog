@@ -21,6 +21,7 @@ import remarkGfm from "remark-gfm";
 import Loading from "../shared/Loading";
 import { singlelineToMultiline } from "~/utils/markdown";
 import rehypeRaw from "rehype-raw";
+import dayjs from "dayjs";
 
 const PagePostDetail = () => {
   const pathname = useLocation().pathname;
@@ -73,6 +74,8 @@ const PagePostDetail = () => {
                 ? nightOwl
                 : nightOwl;
 
+  const date = dayjs(post?.createdAt).format("MMMM DD, YYYY");
+
   return post ? (
     <>
       <Head title={"Archive"}></Head>
@@ -91,7 +94,7 @@ const PagePostDetail = () => {
               </div>
               <div className="flex flex-col text-[15px] place-items-start">
                 <span className="font-bold">Drew Lee</span>
-                <span>October 24, 2023</span>
+                <span>{date}</span>
               </div>
             </button>
           </div>
