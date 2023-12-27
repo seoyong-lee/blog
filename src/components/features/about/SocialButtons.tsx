@@ -13,10 +13,10 @@ const SocialButtons = () => {
             <FaLinkedin className="w-8 h-8 sm:w-6 sm:h-6 hover:opacity-50 text-info" />
           </Link>
           <Link to="https://github.com/seoyong-lee" target="_blank">
-            <FaGithub className="w-8 h-8 sm:w-6 sm:h-6  hover:opacity-50 text-success" />
+            <FaGithub className="w-8 h-8 sm:w-6 sm:h-6  hover:opacity-50 text-info" />
           </Link>
           <Link to="mailto:sy3783@gmail.com">
-            <MdEmail className="w-[2rem] h-[2rem] sm:w-[1.6rem] sm:h-[1.6rem] hover:opacity-50 text-accent" />
+            <MdEmail className="w-[2rem] h-[2rem] sm:w-[1.6rem] sm:h-[1.6rem] hover:opacity-50 text-info" />
           </Link>
         </div>
       )}
