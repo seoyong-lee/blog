@@ -5,7 +5,7 @@ import Loading from "../shared/Loading";
 import PostDetailWrapper from "../features/postDetail/PostDetailWrapper";
 import PostDetailMainImg from "../features/postDetail/PostDetailMainImg";
 import PostDetailMarkdown from "../features/postDetail/PostDetailMarkdown";
-import PostDetailHeader from "../features/postDetail/postDetailHeader";
+import PostDetailHeader from "../features/postDetail/PostDetailHeader";
 import { usePostDetail } from "../hooks/usePostDetail";
 
 const PagePostDetail = () => {
