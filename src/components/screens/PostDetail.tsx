@@ -9,13 +9,14 @@ import { useCallback, useEffect, useState } from "react";
 import { Firestore } from "firebase/firestore";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { headerFixedStateAtom, themeStateAtom } from "~/recoil/common";
+
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { oneLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { nord } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import remarkGfm from "remark-gfm";
 import Loading from "../shared/Loading";
@@ -64,15 +65,15 @@ const PagePostDetail = () => {
       ? nord
       : theme === "forest"
         ? darcula
-        : theme === "light"
-          ? base16AteliersulphurpoolLight
+        : theme === "black"
+          ? atomDark
           : theme === "sunset"
             ? oneDark
             : theme === "winter"
               ? oneLight
               : theme === "night"
-                ? nightOwl
-                : nightOwl;
+                ? dracula
+                : dracula;
 
   const date = dayjs(post?.createdAt).format("MMMM DD, YYYY");
 

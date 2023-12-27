@@ -17,18 +17,28 @@ import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/cjs
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useFirestore } from "~/lib/firebase";
-import { addPost } from "~/services/post";
+import { addPost, getPostByPostId } from "~/services/post";
 import { Post } from "~/types/scheme";
 import { multilineToSingleline } from "~/utils/markdown";
+import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { customAlphabet } from "nanoid";
 
 function PageEdit() {
+  const pathname = useLocation().pathname;
+  const postId = pathname.split("/post/")?.[1];
   const navigate = useNavigate();
   const db = useFirestore();
+  const storage = getStorage();
+
   const [theme] = useRecoilState(themeStateAtom);
   const setShowHeader = useSetRecoilState(showHeaderAtom);
+  const setIsShowToast = useSetRecoilState(showToastStateAtom);
+  const setToastText = useSetRecoilState(toastTextStateAtom);
 
+  const [posts, setPosts] = useState<Post[]>();
   const [markdownValue, setMarkdownValue] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
@@ -36,6 +46,8 @@ function PageEdit() {
   const [imgUrl, setImgUrl] = useState("");
 
   const imgRef = useRef<HTMLInputElement | null>(null);
+
+  const generateId = customAlphabet("1234567890", 10);
 
   const codeStyle =
     theme === "nord"
@@ -63,11 +75,19 @@ function PageEdit() {
     }
   };
 
-  useEffect(() => {
-    setShowHeader(false);
-  }, []);
-
   const date = dayjs().format("MMMM DD, YYYY");
+
+  const getPostData = async () => {
+    if (!postId) {
+      // const id = generateId();
+      // navigate("/edit/" + id);
+      return;
+    }
+
+    const postData = await getPostByPostId(db, postId);
+
+    setPosts(postData);
+  };
 
   const handleClickBack = () => {
     setShowHeader(true);
@@ -80,23 +100,51 @@ function PageEdit() {
     }
 
     setLoading(true);
-    const post = {
-      id: "123",
-      title: title,
-      desc: "",
-      text: multilineToSingleline(markdownValue),
-      author: {
-        name: "Drew Lee",
-      },
-      deleted: false,
-      isPublic: false,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    } as Post;
 
-    await addPost(db, post);
-    setLoading(false);
+    // try {
+    //   fetch(imgUrl).then((res) => {
+    //     const metadata = {
+    //       contentType:
+    //         res?.url?.split(";")?.[0]?.split(":")?.[1] ?? "image/jpeg",
+    //     };
+    //     res.blob().then(async (url) => {
+    //       const storageRef = ref(storage, `/thumbnails/${id}`);
+    //       const res = await uploadBytes(storageRef, url, metadata);
+    //       const photoUrl = await getDownloadURL(res?.ref);
+
+    //       {
+    //         const post = {
+    //           id: id,
+    //           title: title,
+    //           desc: "",
+    //           text: multilineToSingleline(markdownValue),
+    //           author: {
+    //             name: "Drew Lee",
+    //           },
+    //           imgUrl: photoUrl,
+    //           deleted: false,
+    //           isPublic: false,
+    //           createdAt: Date.now(),
+    //           updatedAt: Date.now(),
+    //         } as Post;
+
+    //         await addPost(db, post);
+    //         setLoading(false);
+    //         setIsShowToast(true);
+    //         setToastText("저장완료!");
+    //       }
+    //     });
+    //   });
+    // } catch (e) {
+    //   setLoading(false);
+    //   console.log(e);
+    // }
   };
+
+  useEffect(() => {
+    setShowHeader(false);
+    getPostData();
+  }, []);
 
   return (
     <>
@@ -108,7 +156,7 @@ function PageEdit() {
         >
           나가기
         </button>
-        <div className="flex gap-4">
+        <div className="flex gap-3">
           <button className="btn btn-primary" onClick={handleClickSave}>
             임시저장
           </button>

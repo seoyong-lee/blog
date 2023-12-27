@@ -1,10 +1,11 @@
 import { HelmetProvider } from "react-helmet-async";
-import { RecoilRoot } from "recoil";
+
 import { AuthProvider } from "~/components/contexts/UserContext";
 import { setupFirebase } from "~/lib/firebase";
 import { ClientOnly, type RouteRecord } from "vite-react-ssg";
 import { lazy } from "react";
 import Layout from "../shared/Layout";
+import RecoilRootWrapper from "../contexts/RecoilRootWrapper";
 
 setupFirebase();
 
@@ -22,9 +23,9 @@ export const routes: RouteRecord[] = [
     element: (
       <HelmetProvider>
         <AuthProvider>
-          <RecoilRoot>
+          <RecoilRootWrapper>
             <Layout />
-          </RecoilRoot>
+          </RecoilRootWrapper>
         </AuthProvider>
       </HelmetProvider>
     ),
@@ -42,6 +43,12 @@ export const routes: RouteRecord[] = [
       {
         path: "/edit",
         element: <ClientOnly>{() => <PageEditScreen />}</ClientOnly>,
+        children: [
+          {
+            path: "/edit/:postId",
+            element: <ClientOnly>{() => <PageEditScreen />}</ClientOnly>,
+          },
+        ],
       },
       {
         path: "/archive",

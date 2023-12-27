@@ -19,7 +19,7 @@ const PostItem = ({
         onClick(post.id);
       }}
     >
-      <div className="card card-compact bg-base-300 shadow-xl cursor-pointer hover:bg-base-200">
+      <div className="card card-compact bg-base-200 shadow-xl cursor-pointer hover:bg-base-200">
         <figure className="h-[12rem] sm:h-[14rem] md:h-[15rem] lg:h-[16rem]">
           <img
             src={post?.imgUrl}

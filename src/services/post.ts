@@ -4,7 +4,9 @@ import {
   Firestore,
   getDocs,
   collection,
-  addDoc,
+  setDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 import { Post } from "~/types/scheme";
@@ -18,9 +20,26 @@ export const getPost = async (db: Firestore, postId: string) => {
   }
 };
 
+export const getPostByPostId = async (db: Firestore, postId: string) => {
+  try {
+    const res: Post[] = [];
+    const postRef = collection(db, "Posts");
+    const querySnapshot = await getDocs(
+      query(postRef, where("id", "==", postId))
+    );
+    querySnapshot.forEach((doc) => {
+      res.push(doc.data() as Post);
+    });
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const addPost = async (db: Firestore, post: Post) => {
   try {
-    const res = await addDoc(collection(db, "Posts"), post);
+    const postRef = doc(db, "Posts", post.id);
+    const res = await setDoc(postRef, post);
     return res;
   } catch (e) {
     throw e;

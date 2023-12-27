@@ -17,27 +17,36 @@ const Layout = () => {
   const db = useFirestore();
   const [user, setUser] = useRecoilState(currentUserAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
-  const [theme] = useRecoilState(themeStateAtom);
+  const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [showHeader] = useRecoilState(showHeaderAtom);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const localTheme = localStorage.getItem("theme");
+
+    if (!localTheme) {
+      return;
+    }
+
+    setTheme(localTheme);
+  }, []);
 
   useEffect(() => {
     if (!theme) {
       return;
     }
 
-    if (typeof window === "undefined") {
-      return;
-    }
-
     localStorage.setItem("theme", theme);
 
-    const localTheme = localStorage.getItem("theme");
     const html = document.querySelector("html");
-    if (!html || !localTheme) {
+    if (!html || !theme) {
       return;
     }
 
-    html.setAttribute("data-theme", localTheme);
+    html.setAttribute("data-theme", theme);
   }, [theme]);
 
   useEffect(() => {
@@ -56,6 +65,10 @@ const Layout = () => {
       }
     });
   }, []);
+
+  if (!theme) {
+    return null;
+  }
 
   return (
     <Theme dataTheme={theme}>

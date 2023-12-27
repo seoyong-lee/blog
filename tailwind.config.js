@@ -29,6 +29,6 @@ module.exports = {
   variants: {},
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["forest", "night", "winter", "light", "sunset", "nord"],
+    themes: ["forest", "night", "winter", "black", "sunset", "nord"],
   },
 };
