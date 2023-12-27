@@ -93,7 +93,11 @@ function PageEdit() {
 
   const handleClickBack = () => {
     setShowHeader(true);
-    navigate("/");
+    if (post?.isPublic) {
+      navigate("/");
+    } else {
+      navigate("/temporary");
+    }
   };
 
   const handleClickSave = async () => {

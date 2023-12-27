@@ -1,6 +1,6 @@
 import { Head } from "~/components/shared/Head";
 
-import SocialButtons from "../domain/about/SocialButtons";
+import SocialButtons from "../features/about/SocialButtons";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { headerFixedStateAtom } from "~/recoil/common";
