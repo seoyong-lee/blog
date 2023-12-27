@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Head } from "~/components/shared/Head";
 
 import Markdown from "react-markdown";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { showHeaderAtom, themeStateAtom } from "~/recoil/common";
@@ -51,6 +53,14 @@ function PageEdit() {
 
   const imgRef = useRef<HTMLInputElement | null>(null);
 
+  const modalRef = useRef<HTMLDialogElement>(null);
+
+  type ValuePiece = Date | null;
+  type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+  const [dateValue, onChangeDate] = useState<Value>(
+    new Date(dayjs(post?.createdAt).toDate())
+  );
   const generateId = customAlphabet("1234567890", 10);
 
   const codeStyle =
@@ -80,7 +90,7 @@ function PageEdit() {
     }
   };
 
-  const date = dayjs().format("MMMM DD, YYYY");
+  const date = dayjs(dateValue as Date).format("MMMM DD, YYYY");
 
   const getPostData = async () => {
     if (!postId) {
@@ -119,6 +129,7 @@ function PageEdit() {
         imgDesc: imgDesc,
         deleted: false,
         isPublic: true,
+        createdAt: dayjs(dateValue as Date)?.unix() * 1000,
         updatedAt: Date.now(),
       } as Post;
 
@@ -169,6 +180,7 @@ function PageEdit() {
                   imgDesc: imgDesc,
                   deleted: false,
                   isPublic: false,
+                  createdAt: dayjs(dateValue as Date)?.unix() * 1000,
                   updatedAt: Date.now(),
                 } as Post;
 
@@ -199,6 +211,7 @@ function PageEdit() {
             imgDesc: imgDesc,
             deleted: false,
             isPublic: false,
+            createdAt: dayjs(dateValue as Date)?.unix() * 1000,
             updatedAt: Date.now(),
           } as Post;
 
@@ -240,7 +253,7 @@ function PageEdit() {
                 imgDesc: imgDesc,
                 deleted: false,
                 isPublic: false,
-                createdAt: Date.now(),
+                createdAt: dayjs(dateValue as Date)?.unix() * 1000,
                 updatedAt: Date.now(),
               } as Post;
 
@@ -331,16 +344,43 @@ function PageEdit() {
               value={imgDesc}
               onChange={(e) => setImgDesc(e.target.value)}
             />
-            <div className="label">
-              <span className="label-text">설명글</span>
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <div className="label">
+                  <span className="label-text">설명글</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Description"
+                  className="input input-bordered input-sm w-full max-w-xs mb-5"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                />
+              </div>
+              <div>
+                <div className="label">
+                  <span className="label-text">작성일</span>
+                </div>
+                <div
+                  className="input input-bordered input-sm w-full max-w-xs mb- cursor-pointer"
+                  onClick={() => modalRef?.current?.showModal()}
+                >
+                  {date}
+                </div>
+                <dialog className="modal" ref={modalRef}>
+                  <div className="modal-box flex flex-col place-items-center">
+                    <h3 className="font-bold text-lg">작성일 수정</h3>
+                    <Calendar onChange={onChangeDate} value={dateValue} />
+                    <div className="modal-action">
+                      <form method="dialog">
+                        {/* if there is a button in form, it will close the modal */}
+                        <button className="btn">Close</button>
+                      </form>
+                    </div>
+                  </div>
+                </dialog>
+              </div>
             </div>
-            <input
-              type="text"
-              placeholder="Description"
-              className="input input-bordered input-sm w-full max-w-xs mb-5"
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
-            />
             <MDEditor
               height={410}
               preview="edit"

@@ -2,7 +2,7 @@ import { Theme } from "react-daisyui";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRecoilState } from "recoil";
 import { useFirestore } from "~/lib/firebase";
@@ -19,6 +19,12 @@ const Layout = () => {
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [showHeader] = useRecoilState(showHeaderAtom);
+
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -65,6 +71,10 @@ const Layout = () => {
       }
     });
   }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
 
   return (
     <Theme dataTheme={theme!}>
