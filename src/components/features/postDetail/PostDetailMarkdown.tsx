@@ -1,43 +1,15 @@
 import { lazy } from "react";
 
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+const SyntaxHighlighter = lazy(
+  () => import("react-syntax-highlighter/dist/cjs/prism")
+);
 
-const oneDark = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/one-dark")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
-const dracula = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/dracula")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
-const oneLight = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/one-light")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
-const nord = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/nord")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
-const darcula = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/darcula")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
-const atomDark = lazy(
-  // @ts-ignore
-  () => import("react-syntax-highlighter/dist/cjs/styles/prism/atom-dark")
-) as unknown as {
-  [key: string]: React.CSSProperties;
-};
+import { nord } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { oneLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -77,7 +49,6 @@ const PostDetailMarkdown = ({ markdown }: { markdown?: string }) => {
           code({ node, className, style, children, ...props }) {
             const hasLang = /language-(\w+)/.exec(className || "");
             return hasLang ? (
-              //@ts-ignore
               <SyntaxHighlighter
                 style={getCodeStyle(theme)}
                 language={hasLang[1]}

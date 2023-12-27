@@ -100,6 +100,38 @@ function PageEdit() {
     }
   };
 
+  const handleClickPublish = async () => {
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const post = {
+        id: postId,
+        title: title,
+        desc: "",
+        text: multilineToSingleline(markdownValue),
+        author: {
+          name: "Drew Lee",
+        },
+        deleted: false,
+        isPublic: true,
+        updatedAt: Date.now(),
+      } as Post;
+
+      await updatePost(db, post);
+
+      setIsShowToast(true);
+      setToastText("게시완료!");
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleClickSave = async () => {
     if (loading) {
       return;
@@ -256,7 +288,9 @@ function PageEdit() {
           <button className="btn btn-primary" onClick={handleClickSave}>
             임시저장
           </button>
-          <button className="btn btn-success">수정하기</button>
+          <button className="btn btn-success" onClick={handleClickPublish}>
+            게시하기
+          </button>
         </div>
       </footer>
       <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-full">
