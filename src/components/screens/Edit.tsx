@@ -44,8 +44,9 @@ function PageEdit() {
   const [markdownValue, setMarkdownValue] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
-  const [imgDesc, setImgDesc] = useState("");
+  const [desc, setDesc] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [imgDesc, setImgDesc] = useState("");
   const [isImgChange, setIsImgChange] = useState(false);
 
   const imgRef = useRef<HTMLInputElement | null>(null);
@@ -110,11 +111,12 @@ function PageEdit() {
       const post = {
         id: postId,
         title: title,
-        desc: "",
+        desc: desc,
         text: multilineToSingleline(markdownValue),
         author: {
           name: "Drew Lee",
         },
+        imgDesc: imgDesc,
         deleted: false,
         isPublic: true,
         updatedAt: Date.now(),
@@ -124,7 +126,9 @@ function PageEdit() {
 
       setIsShowToast(true);
       setToastText("게시완료!");
+      setShowHeader(true);
       setLoading(false);
+      navigate("/post/" + postId);
     } catch (e) {
       console.log(e);
     } finally {
@@ -156,12 +160,13 @@ function PageEdit() {
                 const post = {
                   id: postId,
                   title: title,
-                  desc: "",
+                  desc: desc,
                   text: multilineToSingleline(markdownValue),
                   author: {
                     name: "Drew Lee",
                   },
                   imgUrl: photoUrl,
+                  imgDesc: imgDesc,
                   deleted: false,
                   isPublic: false,
                   updatedAt: Date.now(),
@@ -186,11 +191,12 @@ function PageEdit() {
           const post = {
             id: postId,
             title: title,
-            desc: "",
+            desc: desc,
             text: multilineToSingleline(markdownValue),
             author: {
               name: "Drew Lee",
             },
+            imgDesc: imgDesc,
             deleted: false,
             isPublic: false,
             updatedAt: Date.now(),
@@ -225,12 +231,13 @@ function PageEdit() {
               const post = {
                 id: newPostId,
                 title: title,
-                desc: "",
+                desc: desc,
                 text: multilineToSingleline(markdownValue),
                 author: {
                   name: "Drew Lee",
                 },
                 imgUrl: photoUrl,
+                imgDesc: imgDesc,
                 deleted: false,
                 isPublic: false,
                 createdAt: Date.now(),
@@ -264,8 +271,10 @@ function PageEdit() {
       return;
     }
     setImgUrl(post?.imgUrl ?? "");
+    setImgDesc(post?.imgDesc ?? "");
     setTitle(post?.title ?? "");
     setMarkdownValue(singlelineToMultiline(post?.text) ?? "");
+    setDesc(post?.desc ?? "");
   }, [post]);
 
   useEffect(() => {
@@ -293,7 +302,7 @@ function PageEdit() {
           </button>
         </div>
       </footer>
-      <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-full">
+      <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-[90vh] overflow-hidden pb-8">
         <div className="w-full py-12 grid grid-cols-2 gap-8 h-full overflow-y-hidden">
           <div>
             <div className="label">
@@ -315,24 +324,31 @@ function PageEdit() {
               className="file-input file-input-bordered w-full max-w-xs mb-1"
               onChange={saveImgFile}
             />
-            <div className="label">
-              <span className="label-text">이미지 출처</span>
-            </div>
             <input
               type="text"
-              placeholder="Post Title"
-              className="input input-bordered w-full max-w-xs mb-5"
+              placeholder="이미지 출처"
+              className="input input-bordered input-sm w-full max-w-xs mb-1"
               value={imgDesc}
               onChange={(e) => setImgDesc(e.target.value)}
             />
+            <div className="label">
+              <span className="label-text">설명글</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Description"
+              className="input input-bordered input-sm w-full max-w-xs mb-5"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
             <MDEditor
-              height={780}
+              height={410}
               preview="edit"
               value={markdownValue}
               onChange={setMarkdownValue}
             />
           </div>
-          <div className="w-full h-full mt-8 overflow-y-scroll border border-gray-700 p-10">
+          <div className="w-full h-[95%] mt-8 pb-10 overflow-y-scroll border border-gray-700 p-10">
             <div className="flex flex-col place-items-center pt-0">
               <h1 className="font-bold text-3xl text-left w-full sm:text-[40px] leading-[1.3] sm:leading-[1.35]">
                 {title ?? ""}
@@ -366,13 +382,19 @@ function PageEdit() {
                     />
                   )}
                 </picture>
-                <figcaption className="mt-4 text-center text-[12px] sm:text-[14px] text-secondary">
-                  {imgDesc}
+                <figcaption className="mt-4 flex justify-center">
+                  <Markdown
+                    className="prose max-w-none text-secondary text-center text-[12px] sm:text-[14px] prose-a:text-secondary"
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                  >
+                    {imgDesc}
+                  </Markdown>
                 </figcaption>
               </figure>
               <div className="w-full flex justify-center mt-9 h-full">
                 <Markdown
-                  className="prose w-full max-w-none box-content prose-pre:bg-transparent prose-code:bg-transparent prose-pre:px-0 prose-pre:py-0"
+                  className="prose w-full max-w-none box-content prose:mb-[20rem] prose-pre:bg-transparent prose-code:bg-transparent prose-pre:px-0 prose-pre:py-0"
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
                   components={{

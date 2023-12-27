@@ -10,6 +10,7 @@ import {
   updateDoc,
   DocumentData,
   deleteDoc,
+  orderBy,
 } from "firebase/firestore";
 
 import { Post } from "~/types/scheme";
@@ -61,9 +62,14 @@ export const updatePost = async (db: Firestore, post: Post) => {
 
 export const getPosts = async (db: Firestore) => {
   try {
-    const postDoc = await getDocs(collection(db, "Posts"));
+    const postRef = collection(db, "Posts");
+
+    const querySnapshot = await getDocs(
+      query(postRef, orderBy("createdAt", "desc"))
+    );
+
     const res: Post[] = [];
-    postDoc.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
       const docData = doc.data() as Post;
       if (!docData?.deleted && docData?.isPublic) {
         res.push(docData);
@@ -77,9 +83,14 @@ export const getPosts = async (db: Firestore) => {
 
 export const getTemporaryPosts = async (db: Firestore) => {
   try {
-    const postDoc = await getDocs(collection(db, "Posts"));
+    const postRef = collection(db, "Posts");
+
+    const querySnapshot = await getDocs(
+      query(postRef, orderBy("createdAt", "desc"))
+    );
+
     const res: Post[] = [];
-    postDoc.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
       const docData = doc.data() as Post;
       if (!docData?.deleted && !docData?.isPublic) {
         res.push(docData);

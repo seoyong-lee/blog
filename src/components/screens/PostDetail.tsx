@@ -24,7 +24,7 @@ const PagePostDetail = () => {
           onClickEdit={onClickEdit}
         />
         <article className="my-10 mb-20 md:px-10 w-full h-full">
-          <PostDetailMainImg imgUrl={post?.imgUrl} />
+          <PostDetailMainImg imgUrl={post?.imgUrl} imgDesc={post?.imgDesc} />
           <PostDetailMarkdown markdown={replacedText} />
         </article>
       </PostDetailWrapper>

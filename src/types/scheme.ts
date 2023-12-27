@@ -10,6 +10,7 @@ export interface Post {
   title: string;
   desc?: string;
   imgUrl: string;
+  imgDesc?: string;
   text: string;
   author: {
     name: string;
