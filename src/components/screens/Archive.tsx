@@ -47,7 +47,7 @@ function PageArchive() {
   return (
     <>
       <Head title={"Archive"}></Head>
-      <div className="flex flex-col max-w-[780px] w-full h-screen px-6 sm:px-10 lg:py-0 pt-12">
+      <div className="flex flex-col max-w-[780px] w-full xl:min-h-[calc(100vh-124px)] min-h-[calc(100vh-68px)] h-full px-4 sm:px-10 lg:py-0 pt-12">
         <TitleHeader title={"Archive"} />
         <section className="px-2">
           {postsByDate ? (
@@ -63,7 +63,7 @@ function PageArchive() {
                   {Object.keys(postsByDate[year])?.map((month) => {
                     return (
                       <Fragment key={year + month}>
-                        <div className="mt-2 flex justify-between w-full gap-10">
+                        <div className="mt-2 flex justify-between flex-col md:flex-row w-full gap-10">
                           <span className="text-xl font-bold tracking-tight w-[14rem]">
                             {dayjs(month).format("MMMM")}
                             <span className="text-[14px] font-bold relative left-2 top-[-7px] opacity-60">
