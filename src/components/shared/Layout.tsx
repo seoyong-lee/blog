@@ -66,12 +66,8 @@ const Layout = () => {
     });
   }, []);
 
-  if (!theme) {
-    return null;
-  }
-
   return (
-    <Theme dataTheme={theme}>
+    <Theme dataTheme={theme!}>
       <div className="w-full h-full flex flex-col place-items-center overflow-x-hidden">
         {showHeader && <Header />}
         <Suspense fallback={<Loading />}>
