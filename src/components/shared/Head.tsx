@@ -3,9 +3,10 @@ import { Helmet } from "react-helmet-async";
 type Props = {
   title: string;
   description?: string;
+  thumbnail?: string;
 };
 
-export const Head = ({ title, description }: Props) => (
+export const Head = ({ title, description, thumbnail }: Props) => (
   <Helmet>
     <title>{`${title} | Drew.log`}</title>
     <meta name="description" content={description ?? "drew's blog"} />
@@ -19,7 +20,7 @@ export const Head = ({ title, description }: Props) => (
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.drewww.dev/" />
 
-    <meta property="og:image" content="/og.png" />
+    <meta property="og:image" content={thumbnail ? thumbnail : "/og.png"} />
     <meta property="og:image:width" content="800" />
     <meta property="og:image:height" content="400" />
 
@@ -30,6 +31,6 @@ export const Head = ({ title, description }: Props) => (
       content={description ? description : "drew's blog"}
     />
     <meta name="twitter:site" content="https://www.drewww.dev/" />
-    <meta name="twitter:image" content="/og.png" />
+    <meta name="twitter:image" content={thumbnail ? thumbnail : "/og.png"} />
   </Helmet>
 );
