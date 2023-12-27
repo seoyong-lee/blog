@@ -12,7 +12,7 @@ export const Head = ({ title, description, thumbnail }: Props) => (
     <meta name="description" content={description ?? "drew's blog"} />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-    <meta property="og:title" content={`${title} | Drew.log`} />
+    <meta property="og:title" content={title} />
     <meta
       property="og:description"
       content={description ? description : "drew's blog"}

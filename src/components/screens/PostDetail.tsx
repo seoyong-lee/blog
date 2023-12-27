@@ -14,7 +14,11 @@ const PagePostDetail = () => {
 
   return post ? (
     <Fragment>
-      <Head title={post?.title ?? "Post"} thumbnail={post?.imgUrl}></Head>
+      <Head
+        title={post?.title ?? "Post"}
+        description={post?.desc}
+        thumbnail={post?.imgUrl}
+      ></Head>
       <PostDetailWrapper>
         <PostDetailHeader
           title={post?.title ?? "제목없는 글"}
