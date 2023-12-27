@@ -1,3 +1,6 @@
+import { useRecoilState } from "recoil";
+import { isLoginStateAtom } from "~/recoil/user";
+
 const PostDetailHeader = ({
   title,
   date,
@@ -11,6 +14,8 @@ const PostDetailHeader = ({
   onClickPublish: () => void;
   onClickEdit: () => void;
 }) => {
+  const [isLogin] = useRecoilState(isLoginStateAtom);
+
   return (
     <div className="flex flex-col place-items-center pt-16 px-6 sm:px-10">
       <h1 className="font-bold text-3xl text-left w-full sm:text-[40px] leading-[1.3] sm:leading-[1.35]">
@@ -28,20 +33,22 @@ const PostDetailHeader = ({
               <span className="font-bold">Drew Lee</span>
               <span>{date}</span>
             </div>
-            <div className="flex gap-2">
-              <button
-                className="btn btn-outline btn-info"
-                onClick={onClickEdit}
-              >
-                수정
-              </button>
-              <button
-                className="btn btn-outline btn-secondary"
-                onClick={onClickPublish}
-              >
-                {isPublic ? "비공개" : "공개"}
-              </button>
-            </div>
+            {isLogin && (
+              <div className="flex gap-2">
+                <button
+                  className="btn btn-outline btn-info"
+                  onClick={onClickEdit}
+                >
+                  수정
+                </button>
+                <button
+                  className="btn btn-outline btn-secondary"
+                  onClick={onClickPublish}
+                >
+                  {isPublic ? "비공개" : "공개"}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
