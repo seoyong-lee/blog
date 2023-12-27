@@ -59,7 +59,7 @@ const Layout = () => {
 
       if (!isLogin && user.uid) {
         const userData = await getUser(db, user.uid);
-        console.log("user data: ", userData);
+
         setIsLogin(true);
         setUser(userData);
       }

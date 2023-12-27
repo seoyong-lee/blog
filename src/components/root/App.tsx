@@ -14,6 +14,9 @@ const PagePostDetail = lazy(() => import("../screens/PostDetail"));
 const PageArchiveScreen = lazy(() => import("../screens/Archive"));
 const PageAboutScreen = lazy(() => import("../screens/About"));
 const PageLoginScreen = lazy(() => import("../screens/Login"));
+const PageTemporaryPostsScreen = lazy(
+  () => import("../screens/TemporaryPosts")
+);
 const PageEditScreen = lazy(() => import("../screens/Edit"));
 const Page404Screen = lazy(() => import("../screens/404"));
 
@@ -39,6 +42,10 @@ export const routes: RouteRecord[] = [
       {
         path: "*",
         element: <Page404Screen />,
+      },
+      {
+        path: "/temporary",
+        element: <ClientOnly>{() => <PageTemporaryPostsScreen />}</ClientOnly>,
       },
       {
         path: "/edit",

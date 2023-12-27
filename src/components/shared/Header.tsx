@@ -152,7 +152,7 @@ const Header = () => {
               )}
               {isLogin && (
                 <Link
-                  to={"/edit"}
+                  to={"/temporary"}
                   className="font-semibold text-accent hover:text-accent-focus"
                 >
                   Edit

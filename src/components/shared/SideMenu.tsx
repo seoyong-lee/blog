@@ -87,7 +87,7 @@ const SideMenu = ({
                   )}
                   {isLogin && (
                     <Link
-                      to={"/edit"}
+                      to={"/temporary"}
                       onClick={onClickMenu}
                       className="text-2xl font-semibold text-accent hover:opacity-50"
                     >

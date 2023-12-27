@@ -7,6 +7,9 @@ import {
   setDoc,
   query,
   where,
+  updateDoc,
+  DocumentData,
+  deleteDoc,
 } from "firebase/firestore";
 
 import { Post } from "~/types/scheme";
@@ -46,6 +49,16 @@ export const addPost = async (db: Firestore, post: Post) => {
   }
 };
 
+export const updatePost = async (db: Firestore, post: Post) => {
+  try {
+    const postRef = doc(db, "Posts", post.id);
+    const res = await updateDoc(postRef, post as DocumentData);
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
 export const getPosts = async (db: Firestore) => {
   try {
     const postDoc = await getDocs(collection(db, "Posts"));
@@ -56,6 +69,32 @@ export const getPosts = async (db: Firestore) => {
         res.push(docData);
       }
     });
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getTemporaryPosts = async (db: Firestore) => {
+  try {
+    const postDoc = await getDocs(collection(db, "Posts"));
+    const res: Post[] = [];
+    postDoc.forEach((doc) => {
+      const docData = doc.data() as Post;
+      if (!docData?.deleted && !docData?.isPublic) {
+        res.push(docData);
+      }
+    });
+    return res;
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const deletePost = async (db: Firestore, postId: string) => {
+  try {
+    const postRef = doc(db, "Posts", postId);
+    const res = await deleteDoc(postRef);
     return res;
   } catch (e) {
     throw e;

@@ -19,31 +19,34 @@ import rehypeRaw from "rehype-raw";
 import dayjs from "dayjs";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFirestore } from "~/lib/firebase";
-import { addPost, getPostByPostId } from "~/services/post";
+import { addPost, getPostByPostId, updatePost } from "~/services/post";
 import { Post } from "~/types/scheme";
-import { multilineToSingleline } from "~/utils/markdown";
+import { multilineToSingleline, singlelineToMultiline } from "~/utils/markdown";
 import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { customAlphabet } from "nanoid";
+import { isLoginStateAtom } from "~/recoil/user";
 
 function PageEdit() {
   const pathname = useLocation().pathname;
-  const postId = pathname.split("/post/")?.[1];
+  const postId = pathname.split("/edit/")?.[1];
   const navigate = useNavigate();
   const db = useFirestore();
   const storage = getStorage();
 
+  const [isLogin] = useRecoilState(isLoginStateAtom);
   const [theme] = useRecoilState(themeStateAtom);
   const setShowHeader = useSetRecoilState(showHeaderAtom);
   const setIsShowToast = useSetRecoilState(showToastStateAtom);
   const setToastText = useSetRecoilState(toastTextStateAtom);
 
-  const [posts, setPosts] = useState<Post[]>();
+  const [post, setPost] = useState<Post>();
   const [markdownValue, setMarkdownValue] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [imgDesc, setImgDesc] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [isImgChange, setIsImgChange] = useState(false);
 
   const imgRef = useRef<HTMLInputElement | null>(null);
 
@@ -68,6 +71,7 @@ function PageEdit() {
     const file = imgRef?.current?.files?.[0];
     const reader = new FileReader();
     if (file) {
+      setIsImgChange(true);
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setImgUrl(reader?.result as string);
@@ -79,19 +83,17 @@ function PageEdit() {
 
   const getPostData = async () => {
     if (!postId) {
-      // const id = generateId();
-      // navigate("/edit/" + id);
       return;
     }
 
     const postData = await getPostByPostId(db, postId);
 
-    setPosts(postData);
+    setPost(postData?.[0]);
   };
 
   const handleClickBack = () => {
     setShowHeader(true);
-    navigate(-1);
+    navigate("/");
   };
 
   const handleClickSave = async () => {
@@ -101,50 +103,140 @@ function PageEdit() {
 
     setLoading(true);
 
-    // try {
-    //   fetch(imgUrl).then((res) => {
-    //     const metadata = {
-    //       contentType:
-    //         res?.url?.split(";")?.[0]?.split(":")?.[1] ?? "image/jpeg",
-    //     };
-    //     res.blob().then(async (url) => {
-    //       const storageRef = ref(storage, `/thumbnails/${id}`);
-    //       const res = await uploadBytes(storageRef, url, metadata);
-    //       const photoUrl = await getDownloadURL(res?.ref);
+    if (postId) {
+      if (isImgChange) {
+        try {
+          fetch(imgUrl).then((res) => {
+            const metadata = {
+              contentType:
+                res?.url?.split(";")?.[0]?.split(":")?.[1] ?? "image/jpeg",
+            };
+            res.blob().then(async (url) => {
+              const storageRef = ref(storage, `/thumbnails/${postId}`);
+              const res = await uploadBytes(storageRef, url, metadata);
+              const photoUrl = await getDownloadURL(res?.ref);
 
-    //       {
-    //         const post = {
-    //           id: id,
-    //           title: title,
-    //           desc: "",
-    //           text: multilineToSingleline(markdownValue),
-    //           author: {
-    //             name: "Drew Lee",
-    //           },
-    //           imgUrl: photoUrl,
-    //           deleted: false,
-    //           isPublic: false,
-    //           createdAt: Date.now(),
-    //           updatedAt: Date.now(),
-    //         } as Post;
+              {
+                const post = {
+                  id: postId,
+                  title: title,
+                  desc: "",
+                  text: multilineToSingleline(markdownValue),
+                  author: {
+                    name: "Drew Lee",
+                  },
+                  imgUrl: photoUrl,
+                  deleted: false,
+                  isPublic: false,
+                  updatedAt: Date.now(),
+                } as Post;
 
-    //         await addPost(db, post);
-    //         setLoading(false);
-    //         setIsShowToast(true);
-    //         setToastText("저장완료!");
-    //       }
-    //     });
-    //   });
-    // } catch (e) {
-    //   setLoading(false);
-    //   console.log(e);
-    // }
+                await updatePost(db, post);
+
+                setIsShowToast(true);
+                setToastText("저장완료!");
+                setLoading(false);
+              }
+            });
+          });
+        } catch (e) {
+          console.log(e);
+        } finally {
+          setLoading(false);
+          setIsImgChange(false);
+        }
+      } else {
+        try {
+          const post = {
+            id: postId,
+            title: title,
+            desc: "",
+            text: multilineToSingleline(markdownValue),
+            author: {
+              name: "Drew Lee",
+            },
+            deleted: false,
+            isPublic: false,
+            updatedAt: Date.now(),
+          } as Post;
+
+          await updatePost(db, post);
+
+          setIsShowToast(true);
+          setToastText("저장완료!");
+          setLoading(false);
+        } catch (e) {
+          console.log(e);
+        } finally {
+          setLoading(false);
+        }
+      }
+    } else {
+      const newPostId = generateId();
+
+      try {
+        fetch(imgUrl).then((res) => {
+          const metadata = {
+            contentType:
+              res?.url?.split(";")?.[0]?.split(":")?.[1] ?? "image/jpeg",
+          };
+          res.blob().then(async (url) => {
+            const storageRef = ref(storage, `/thumbnails/${newPostId}`);
+            const res = await uploadBytes(storageRef, url, metadata);
+            const photoUrl = await getDownloadURL(res?.ref);
+
+            {
+              const post = {
+                id: newPostId,
+                title: title,
+                desc: "",
+                text: multilineToSingleline(markdownValue),
+                author: {
+                  name: "Drew Lee",
+                },
+                imgUrl: photoUrl,
+                deleted: false,
+                isPublic: false,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
+              } as Post;
+
+              await addPost(db, post);
+
+              setIsShowToast(true);
+              setToastText("저장완료!");
+              setLoading(false);
+              navigate("/edit/" + newPostId);
+            }
+          });
+        });
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
+    }
   };
 
   useEffect(() => {
     setShowHeader(false);
     getPostData();
-  }, []);
+  }, [postId]);
+
+  useEffect(() => {
+    if (!post) {
+      return;
+    }
+    setImgUrl(post?.imgUrl ?? "");
+    setTitle(post?.title ?? "");
+    setMarkdownValue(singlelineToMultiline(post?.text) ?? "");
+  }, [post]);
+
+  useEffect(() => {
+    if (!isLogin) {
+      navigate("/");
+    }
+  }, [isLogin]);
 
   return (
     <>
@@ -164,8 +256,6 @@ function PageEdit() {
         </div>
       </footer>
       <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-full">
-        {/* <h1 className="text-4xl font-bold text-center">Editor</h1> */}
-
         <div className="w-full py-12 grid grid-cols-2 gap-8 h-full overflow-y-hidden">
           <div>
             <div className="label">

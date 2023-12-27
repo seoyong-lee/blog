@@ -1,12 +1,13 @@
 import PostList from "./PostList";
 import PostsHeader from "./PostsHeader";
+import PostsLayoutWrapper from "./PostsLayoutWrapper";
 
 const PostsMain = () => {
   return (
-    <div className="h-full min-h-screen w-full max-w-[1040px] px-6 sm:px-10 lg:py-0 pt-12">
+    <PostsLayoutWrapper>
       <PostsHeader />
       <PostList />
-    </div>
+    </PostsLayoutWrapper>
   );
 };
 
