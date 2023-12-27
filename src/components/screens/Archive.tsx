@@ -6,14 +6,20 @@ import { headerFixedStateAtom } from "~/recoil/common";
 import { postListAtom } from "~/recoil/post";
 import dayjs from "dayjs";
 import { Post } from "~/types/scheme";
+import { useNavigate } from "react-router-dom";
 interface PostByDate {
   [year: string]: { [month: string]: Post[] };
 }
 
 function PageArchive() {
+  const navigate = useNavigate();
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
   const [posts] = useRecoilState(postListAtom);
   const [postsByDate, setPostsByDate] = useState<PostByDate>();
+
+  const handleClickPost = (postId: string) => () => {
+    navigate("/post/" + postId);
+  };
 
   useEffect(() => {
     setHeaderFixed(true);
@@ -67,7 +73,11 @@ function PageArchive() {
                           <div className="w-full flex flex-col">
                             {postsByDate[year][month].map((post) => {
                               return (
-                                <div className="mb-4" key={post.id}>
+                                <div
+                                  className="mb-4 cursor-pointer"
+                                  key={post.id}
+                                  onClick={handleClickPost(post.id)}
+                                >
                                   <h3 className="text-xl font-semibold">
                                     {post?.title}
                                   </h3>
