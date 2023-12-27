@@ -78,6 +78,7 @@ export const routes: RouteRecord[] = [
             element: <PagePostDetail />,
           },
         ],
+        getStaticPaths: () => ["post/5047110781"],
       },
     ],
   },
