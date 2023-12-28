@@ -316,7 +316,7 @@ function PageEdit() {
     if (!isLogin) {
       navigate.push("/");
     }
-  }, [isLogin]);
+  }, [isLogin, navigate]);
 
   return (
     <>
@@ -337,7 +337,7 @@ function PageEdit() {
           </button>
         </div>
       </footer>
-      <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-[90vh] overflow-hidden pb-8">
+      <div className="flex flex-col w-screen px-4 sm:px-10 py-0 h-[90vh] overflow-hidden">
         <div className="w-full py-12 grid grid-cols-2 gap-8 h-full overflow-y-hidden">
           <div>
             <div className="label">
@@ -444,7 +444,7 @@ function PageEdit() {
                       height={400}
                       src={imgUrl}
                       alt="post main img"
-                      className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[21rem] w-full h-full"
+                      className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full h-full"
                     />
                   )}
                 </picture>

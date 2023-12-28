@@ -11,7 +11,7 @@ function Page404() {
 
   useEffect(() => {
     setHeaderFixed(false);
-  }, []);
+  }, [setHeaderFixed]);
 
   return (
     <>

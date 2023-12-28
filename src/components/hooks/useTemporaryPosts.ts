@@ -50,12 +50,12 @@ export const useTemporaryPosts = () => {
     if (!isLogin) {
       navigate.push("/");
     }
-  }, [isLogin]);
+  }, [isLogin, navigate]);
 
   useEffect(() => {
     setHeaderFixed(false);
     getAndSetPosts();
-  }, [isLoading]);
+  }, [isLoading, setHeaderFixed]);
 
   return {
     posts,

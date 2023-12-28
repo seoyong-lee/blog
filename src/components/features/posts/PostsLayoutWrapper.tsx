@@ -9,7 +9,7 @@ const PostsLayoutWrapper = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     setHeaderFixed(false);
-  }, []);
+  }, [setHeaderFixed]);
 
   return (
     <div className="h-full w-full max-w-[1040px] px-6 sm:px-10 lg:py-0 pt-12">

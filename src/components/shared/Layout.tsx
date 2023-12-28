@@ -68,7 +68,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
         setUser(userData);
       }
     });
-  }, []);
+  }, [isLogin, setIsLogin, setUser]);
 
   return (
     <Theme>

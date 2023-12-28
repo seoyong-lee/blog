@@ -1,7 +1,7 @@
 "use client";
 
 import PostItem from "./PostItem";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { getPosts } from "@/services/post";
 import Loading from "@/components/shared/Loading";
 import { useRecoilState } from "recoil";
@@ -23,17 +23,17 @@ const PostList = () => {
     navigate.push(`/post/${postId}`);
   };
 
-  const getAndSetPosts = async () => {
+  const getAndSetPosts = useCallback(async () => {
     const postList = await getPosts();
     if (!postList) {
       return;
     }
     setPosts(postList);
-  };
+  }, [setPosts]);
 
   useEffect(() => {
     getAndSetPosts();
-  }, []);
+  }, [getAndSetPosts]);
 
   if (!posts) {
     return <Loading />;

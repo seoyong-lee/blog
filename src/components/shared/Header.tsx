@@ -58,7 +58,7 @@ const Header = () => {
       setIsShowToast(true);
       setToastText("관리자 모드 활성화!");
     }
-  }, [showLoginButton]);
+  }, [setIsShowToast, setToastText, showLoginButton]);
 
   return (
     <>
