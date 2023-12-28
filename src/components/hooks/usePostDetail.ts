@@ -10,13 +10,13 @@ import { useToast } from "./useToast";
 import { useRouter } from "next/router";
 import { db } from "@/firebase/firebaseClient";
 
-export const usePostDetail = () => {
+export const usePostDetail = (initialPost: Post) => {
   const toast = useToast();
   const navigate = useRouter();
   const postId = navigate.query.postId as string;
 
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
-  const [post, setPost] = useState<Post>();
+  const [post, setPost] = useState<Post>(initialPost);
   const [isPublic, setIsPublic] = useState(false);
 
   const handleClickPublish = async () => {
@@ -36,7 +36,7 @@ export const usePostDetail = () => {
 
   useEffect(() => {
     setHeaderFixed(true);
-  }, [postId]);
+  }, [postId, setHeaderFixed]);
 
   useEffect(() => {
     if (!postId) {
@@ -53,7 +53,7 @@ export const usePostDetail = () => {
       setPost(post);
     });
     return () => unsub();
-  }, [db, postId]);
+  }, [postId]);
 
   const date = dayjs(post?.createdAt).format("MMMM DD, YYYY");
   const replacedText = singlelineToMultiline(post?.text);

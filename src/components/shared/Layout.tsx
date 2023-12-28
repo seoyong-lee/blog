@@ -36,7 +36,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
     }
 
     setTheme(localTheme);
-  }, []);
+  }, [setTheme]);
 
   useEffect(() => {
     if (!theme) {

@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { Post } from "@/types/scheme";
 import { FaTrashAlt } from "react-icons/fa";
+import Image from "next/image";
 
 const TemporaryPostItem = ({
   post,
@@ -24,8 +25,10 @@ const TemporaryPostItem = ({
     >
       <div className="card card-compact bg-base-200 shadow-xl cursor-pointer hover:bg-base-200">
         <figure className="h-[12rem] sm:h-[14rem] md:h-[15rem] lg:h-[16rem]">
-          <img
+          <Image
             src={post?.imgUrl}
+            width={300}
+            height={200}
             alt="post thumbnail"
             className="h-full w-full object-cover"
           />
@@ -46,7 +49,13 @@ const TemporaryPostItem = ({
               >
                 <div className="avatar mr-3">
                   <div className="w-12 rounded-full overflow-hidden">
-                    <img src="me.png" alt="avatar" className="object-contain" />
+                    <Image
+                      width={100}
+                      height={100}
+                      src="me.png"
+                      alt="avatar"
+                      className="object-contain"
+                    />
                   </div>
                 </div>
                 <div className="flex flex-col">

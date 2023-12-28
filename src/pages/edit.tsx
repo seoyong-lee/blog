@@ -50,6 +50,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { customAlphabet } from "nanoid";
 import { isLoginStateAtom } from "@/recoil/user";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function PageEdit() {
   const navigate = useRouter();
@@ -299,7 +300,7 @@ function PageEdit() {
   useEffect(() => {
     setShowHeader(false);
     getPostData();
-  }, [postId]);
+  }, [getPostData, postId, setShowHeader]);
 
   useEffect(() => {
     if (!post) {
@@ -419,7 +420,9 @@ function PageEdit() {
                 <button className="flex place-items-center cursor-pointer">
                   <div className="avatar mr-4">
                     <div className="w-11 rounded-full overflow-hidden">
-                      <img
+                      <Image
+                        width={100}
+                        height={100}
                         src="/me.png"
                         alt="avatar"
                         className="object-contain"

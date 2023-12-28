@@ -13,7 +13,7 @@ const Toast = () => {
         setIsShow(false);
       }, 3000);
     }
-  }, [isShow]);
+  }, [isShow, setIsShow]);
 
   return (
     <>

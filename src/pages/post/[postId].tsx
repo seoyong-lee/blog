@@ -5,10 +5,13 @@ import PostDetailMainImg from "../../components/features/postDetail/PostDetailMa
 import PostDetailMarkdown from "../../components/features/postDetail/PostDetailMarkdown";
 import PostDetailHeader from "../../components/features/postDetail/PostDetailHeader";
 import { usePostDetail } from "../../components/hooks/usePostDetail";
+import { getPost } from "@/services/post";
+import { Post } from "@/types/scheme";
+import { GetStaticPaths } from "next";
 
-const PagePostDetail = () => {
+const PagePostDetail = ({ initialPost }: { initialPost: Post }) => {
   const { post, isPublic, date, replacedText, onClickPublish, onClickEdit } =
-    usePostDetail();
+    usePostDetail(initialPost);
 
   return (
     <Fragment>
@@ -35,3 +38,26 @@ const PagePostDetail = () => {
 };
 
 export default PagePostDetail;
+
+export const getStaticPaths = (async () => {
+  return {
+    paths: [
+      {
+        params: {
+          postId: "5047110781",
+        },
+      },
+    ],
+    fallback: true,
+  };
+}) satisfies GetStaticPaths;
+
+export async function getStaticProps({ params }: { params: any }) {
+  const post = await getPost(params.postId);
+
+  return {
+    props: {
+      initialPost: post,
+    },
+  };
+}

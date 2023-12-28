@@ -25,7 +25,7 @@ function PageArchive() {
 
   useEffect(() => {
     setHeaderFixed(true);
-  }, []);
+  }, [setHeaderFixed]);
 
   useEffect(() => {
     if (!posts) {

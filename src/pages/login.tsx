@@ -2,6 +2,7 @@ import { HeadMeta } from "@/components/shared/Head";
 import TitleHeader from "../components/shared/TitleHeader";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const provider = new GoogleAuthProvider();
 
@@ -40,7 +41,7 @@ function PageLogin() {
             className="btn bg-white w-[18rem] hover:bg-slate-400"
             onClick={handleClickGoogleLogin}
           >
-            <img
+            <Image
               src="google.png"
               alt="google login"
               width={211}
