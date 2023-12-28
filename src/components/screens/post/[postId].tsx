@@ -1,7 +1,5 @@
 import { Fragment } from "react";
 import { HeadMeta } from "~/components/shared/Head";
-import Loading from "../../shared/Loading";
-
 import PostDetailWrapper from "../../features/postDetail/PostDetailWrapper";
 import PostDetailMainImg from "../../features/postDetail/PostDetailMainImg";
 import PostDetailMarkdown from "../../features/postDetail/PostDetailMarkdown";
@@ -12,13 +10,13 @@ const PagePostDetail = () => {
   const { post, isPublic, date, replacedText, onClickPublish, onClickEdit } =
     usePostDetail();
 
-  return post ? (
+  return (
     <Fragment>
       <HeadMeta
         title={post?.title ?? "Post"}
         description={post?.desc}
         thumbnail={post?.imgUrl}
-      ></HeadMeta>
+      />
       <PostDetailWrapper>
         <PostDetailHeader
           title={post?.title ?? "제목없는 글"}
@@ -33,8 +31,6 @@ const PagePostDetail = () => {
         </article>
       </PostDetailWrapper>
     </Fragment>
-  ) : (
-    <Loading />
   );
 };
 
