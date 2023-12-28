@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { HeadMeta } from "~/components/shared/Head";
-import { headerFixedStateAtom } from "~/recoil/common";
-import { useWindowSize } from "../hooks/useWindowSize";
+import { HeadMeta } from "@/components/shared/Head";
+import { headerFixedStateAtom } from "@/recoil/common";
+import { useWindowSize } from "../components/hooks/useWindowSize";
+import Link from "next/link";
 
 function Page404() {
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
@@ -21,9 +22,9 @@ function Page404() {
       >
         <h1>The page is not found.</h1>
         <div className="mt-4">
-          <a href="/" className="link-primary">
+          <Link href="/" className="link-primary">
             Home
-          </a>
+          </Link>
         </div>
       </div>
     </>

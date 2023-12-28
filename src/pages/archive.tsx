@@ -1,26 +1,26 @@
-import { HeadMeta } from "~/components/shared/Head";
-import TitleHeader from "../shared/TitleHeader";
+import { HeadMeta } from "@/components/shared/Head";
+import TitleHeader from "../components/shared/TitleHeader";
 import { Fragment, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { headerFixedStateAtom } from "~/recoil/common";
-import { postListAtom } from "~/recoil/post";
+import { headerFixedStateAtom } from "@/recoil/common";
+import { postListAtom } from "@/recoil/post";
 import dayjs from "dayjs";
-import { Post } from "~/types/scheme";
-import { useNavigate } from "react-router-dom";
+import { Post } from "@/types/scheme";
+import { useRouter } from "next/router";
 
 interface PostByDate {
   [year: string]: { [month: string]: Post[] };
 }
 
 function PageArchive() {
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
   const [posts] = useRecoilState(postListAtom);
   const [postsByDate, setPostsByDate] = useState<PostByDate>();
 
   const handleClickPost = (postId: string) => () => {
-    navigate("/post/" + postId);
+    navigate.push("/post/" + postId);
   };
 
   useEffect(() => {

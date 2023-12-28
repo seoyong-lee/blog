@@ -1,38 +1,28 @@
-import { Head } from "vite-react-ssg";
 import { Theme } from "react-daisyui";
-import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
-import { Suspense, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useRecoilState } from "recoil";
-import { useFirestore } from "~/lib/firebase";
-import { isLoginStateAtom, currentUserAtom } from "~/recoil/user";
-import { getUser } from "~/services/auth";
+
+import { isLoginStateAtom, currentUserAtom } from "@/recoil/user";
+import { getUser } from "@/services/auth";
 
 import {
   headerFixedStateAtom,
   showHeaderAtom,
   themeStateAtom,
-} from "~/recoil/common";
+} from "@/recoil/common";
 import Toast from "./Toast";
-import Loading from "./Loading";
 import { useWindowSize } from "../hooks/useWindowSize";
 
-const Layout = () => {
-  const db = useFirestore();
+const Layout = ({ children }: { children: ReactNode }) => {
   const { height } = useWindowSize();
   const [user, setUser] = useRecoilState(currentUserAtom);
   const [headerFixed] = useRecoilState(headerFixedStateAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [showHeader] = useRecoilState(showHeaderAtom);
-
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -72,7 +62,7 @@ const Layout = () => {
       }
 
       if (!isLogin && user.uid) {
-        const userData = await getUser(db, user.uid);
+        const userData = await getUser(user.uid);
 
         setIsLogin(true);
         setUser(userData);
@@ -90,9 +80,7 @@ const Layout = () => {
         }}
       >
         {showHeader && <Header />}
-        <Suspense fallback={<Loading />}>
-          <Outlet />
-        </Suspense>
+        {children}
         <Toast />
       </div>
       <Footer />

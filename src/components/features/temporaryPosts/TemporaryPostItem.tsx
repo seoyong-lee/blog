@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Post } from "~/types/scheme";
+import { Post } from "@/types/scheme";
 import { FaTrashAlt } from "react-icons/fa";
 
 const TemporaryPostItem = ({

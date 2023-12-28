@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import { Fragment, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { showToastStateAtom, toastTextStateAtom } from "@/recoil/toast";
 
 const Toast = () => {
   const [isShow, setIsShow] = useRecoilState(showToastStateAtom);

@@ -1,4 +1,4 @@
-import TemporaryPostsMain from "../features/temporaryPosts/TemporaryPostsMain";
+import TemporaryPostsMain from "../components/features/temporaryPosts/TemporaryPostsMain";
 
 function TemporaryPosts() {
   return <TemporaryPostsMain />;

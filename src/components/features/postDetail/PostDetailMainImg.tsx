@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -16,8 +17,11 @@ const PostDetailMainImg = ({
   return (
     <figure className="w-full mb-9">
       <picture>
-        <img
+        <Image
           src={imgUrl}
+          width={300}
+          height={200}
+          quality={100}
           alt="post main img"
           className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full h-full"
         />

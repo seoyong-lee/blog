@@ -1,15 +1,16 @@
-import { HeadMeta } from "~/components/shared/Head";
+import { HeadMeta } from "@/components/shared/Head";
 
-import SocialButtons from "../features/about/SocialButtons";
+import SocialButtons from "../components/features/about/SocialButtons";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { headerFixedStateAtom } from "~/recoil/common";
+import { headerFixedStateAtom } from "@/recoil/common";
+import Image from "next/image";
 function PageAbout() {
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
 
   useEffect(() => {
     setHeaderFixed(false);
-  }, []);
+  }, [setHeaderFixed]);
 
   return (
     <>
@@ -17,7 +18,7 @@ function PageAbout() {
       <div className="flex flex-col max-w-[780px] px-6 sm:px-10 lg:py-0 pt-12">
         <div className="flex flex-col sm:flex-row mt-14 place-items-center">
           <div className="avatar w-[150px] h-[150px] rounded-full mb-10 sm:mb-0 overflow-hidden">
-            <img
+            <Image
               src="/me.png"
               width={150}
               height={150}

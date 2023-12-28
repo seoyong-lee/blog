@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { showToastStateAtom, toastTextStateAtom } from "@/recoil/toast";
 
 export const useToast = () => {
   const setIsShowToast = useSetRecoilState(showToastStateAtom);

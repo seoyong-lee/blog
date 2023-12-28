@@ -1,5 +1,5 @@
-import { Post } from "~/types/scheme";
-import Loading from "~/components/shared/Loading";
+import { Post } from "@/types/scheme";
+import Loading from "@/components/shared/Loading";
 import TemporaryPostItem from "./TemporaryPostItem";
 
 const TemporaryPostList = ({

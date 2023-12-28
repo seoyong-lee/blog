@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { MdMenu } from "@react-icons/all-files/md/MdMenu";
-import { Link, useLocation } from "react-router-dom";
+
 import SideMenu from "./SideMenu";
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { headerFixedStateAtom, themeStateAtom } from "~/recoil/common";
-import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { headerFixedStateAtom, themeStateAtom } from "@/recoil/common";
+import { showToastStateAtom, toastTextStateAtom } from "@/recoil/toast";
 import { getAuth, signOut } from "firebase/auth";
-import { isLoginStateAtom } from "~/recoil/user";
+import { isLoginStateAtom } from "@/recoil/user";
+import Link from "next/link";
+import { MdMenu } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const Header = () => {
   const auth = getAuth();
-  const location = useLocation();
+  const router = useRouter();
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [headerFixed] = useRecoilState(headerFixedStateAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
@@ -20,7 +22,6 @@ const Header = () => {
   const setToastText = useSetRecoilState(toastTextStateAtom);
 
   const [isOpen, setIsOpen] = useState(false);
-
   const [showLoginCount, setShowLoginCount] = useState(0);
 
   const handleClickMenu = () => {
@@ -69,7 +70,7 @@ const Header = () => {
             }`}
           >
             <Link
-              to={"/"}
+              href={"/"}
               className={
                 "hidden sm:block font-bold text-right text-xl hover:opacity-50"
               }
@@ -77,7 +78,7 @@ const Header = () => {
               Drew.log
             </Link>
             <Link
-              to={"/"}
+              href={"/"}
               className="block sm:hidden font-bold text-right text-xl hover:opacity-50"
             >
               D.log
@@ -116,35 +117,34 @@ const Header = () => {
           <div className="flex justify-end w-full">
             <div className="hidden sm:flex  w-full justify-end sm:gap-5 gap-2">
               <Link
-                to={"/"}
+                href={"/"}
                 className={`font-semibold hover:opacity-50 ${
-                  location.pathname === "/" && "border-b-2"
+                  router.pathname === "/" && "border-b-2"
                 }`}
               >
                 Posts
               </Link>
               <Link
-                to={"/archive"}
+                href={"/archive"}
                 className={`font-semibold hover:opacity-50 ${
-                  location.pathname === "/archive" && "border-b-2"
+                  router.pathname === "/archive" && "border-b-2"
                 }`}
               >
                 Archive
               </Link>
               <Link
-                to={"/about"}
+                href={"/about"}
                 className={`font-semibold hover:opacity-50 ${
-                  location.pathname === "/about" && "border-b-2"
+                  router.pathname === "/about" && "border-b-2"
                 }`}
               >
                 About
               </Link>
               {showLoginButton && (
                 <Link
-                  to={"/login"}
+                  href={"/login"}
                   className={`text-primary font-semibold hover:opacity-50 ${
-                    location.pathname === "/login" &&
-                    "border-b-2 border-primary"
+                    router.pathname === "/login" && "border-b-2 border-primary"
                   }`}
                 >
                   Login
@@ -152,7 +152,7 @@ const Header = () => {
               )}
               {isLogin && (
                 <Link
-                  to={"/temporary"}
+                  href={"/temporary"}
                   className="font-semibold text-accent hover:text-accent-focus"
                 >
                   Edit
@@ -160,7 +160,7 @@ const Header = () => {
               )}
               {isLogin && (
                 <Link
-                  to=""
+                  href=""
                   className="font-semibold text-accent hover:text-accent-focus"
                   onClick={handleClickLogout}
                 >

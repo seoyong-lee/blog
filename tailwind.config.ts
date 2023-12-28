@@ -1,10 +1,8 @@
-module.exports = {
+import type { Config } from "tailwindcss";
+
+const config: Config = {
   mode: "jit",
-  purge: {
-    enabled: process.env.NODE_ENV === "production",
-    safeList: [],
-    content: ["./index.html", "./src/**/*.tsx", "./src/**/*.ts"],
-  },
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
     minWidth: {
@@ -26,9 +24,9 @@ module.exports = {
       "2xl": "1536px",
     },
   },
-  variants: {},
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
     themes: ["night", "winter", "black", "sunset", "forest", "nord"],
   },
 };
+export default config;

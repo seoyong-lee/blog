@@ -1,14 +1,13 @@
-import { HeadMeta } from "~/components/shared/Head";
-import TitleHeader from "../shared/TitleHeader";
+import { HeadMeta } from "@/components/shared/Head";
+import TitleHeader from "../components/shared/TitleHeader";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import { useWindowSize } from "../hooks/useWindowSize";
+import { useRouter } from "next/router";
 
 const provider = new GoogleAuthProvider();
 
 function PageLogin() {
   const auth = getAuth();
-  const navigate = useNavigate();
+  const navigate = useRouter();
 
   const handleClickGoogleLogin = () => {
     signInWithPopup(auth, provider)
@@ -21,7 +20,7 @@ function PageLogin() {
         // IdP data available using getAdditionalUserInfo(result)
         // ...
 
-        navigate("/");
+        navigate.push("/");
       })
       .catch((error) => {
         const errorCode = error.code;

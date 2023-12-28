@@ -1,10 +1,10 @@
 import { Fragment } from "react";
-import { HeadMeta } from "~/components/shared/Head";
-import PostDetailWrapper from "../../features/postDetail/PostDetailWrapper";
-import PostDetailMainImg from "../../features/postDetail/PostDetailMainImg";
-import PostDetailMarkdown from "../../features/postDetail/PostDetailMarkdown";
-import PostDetailHeader from "../../features/postDetail/PostDetailHeader";
-import { usePostDetail } from "../../hooks/usePostDetail";
+import { HeadMeta } from "@/components/shared/Head";
+import PostDetailWrapper from "../../components/features/postDetail/PostDetailWrapper";
+import PostDetailMainImg from "../../components/features/postDetail/PostDetailMainImg";
+import PostDetailMarkdown from "../../components/features/postDetail/PostDetailMarkdown";
+import PostDetailHeader from "../../components/features/postDetail/PostDetailHeader";
+import { usePostDetail } from "../../components/hooks/usePostDetail";
 
 const PagePostDetail = () => {
   const { post, isPublic, date, replacedText, onClickPublish, onClickEdit } =

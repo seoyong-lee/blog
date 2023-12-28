@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-import { Post } from "~/types/scheme";
+import { Post } from "@/types/scheme";
+import Image from "next/image";
 
 const PostItem = ({
   post,
@@ -21,8 +22,11 @@ const PostItem = ({
     >
       <div className="card card-compact bg-base-200 shadow-xl cursor-pointer hover:bg-base-200">
         <figure className="h-[12rem] sm:h-[14rem] md:h-[15rem] lg:h-[16rem]">
-          <img
+          <Image
             src={post?.imgUrl}
+            width={200}
+            height={300}
+            quality={100}
             alt="post thumbnail"
             className="h-full w-full object-cover"
           />

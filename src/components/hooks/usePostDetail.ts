@@ -1,21 +1,19 @@
 import dayjs from "dayjs";
-import { Firestore, doc, onSnapshot } from "firebase/firestore";
-import { useState, useCallback, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { doc, onSnapshot } from "firebase/firestore";
+import { useState, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { useFirestore } from "~/lib/firebase";
-import { headerFixedStateAtom } from "~/recoil/common";
-import { getPost, updatePost } from "~/services/post";
-import { Post } from "~/types/scheme";
-import { singlelineToMultiline } from "~/utils/markdown";
+import { headerFixedStateAtom } from "@/recoil/common";
+import { updatePost } from "@/services/post";
+import { Post } from "@/types/scheme";
+import { singlelineToMultiline } from "@/utils/markdown";
 import { useToast } from "./useToast";
+import { useRouter } from "next/router";
+import { db } from "@/firebase/firebaseClient";
 
 export const usePostDetail = () => {
   const toast = useToast();
-  const navigate = useNavigate();
-  const pathname = useLocation().pathname;
-  const postId = pathname.split("/post/")?.[1];
-  const db = useFirestore();
+  const navigate = useRouter();
+  const postId = navigate.query.postId as string;
 
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
   const [post, setPost] = useState<Post>();
@@ -27,13 +25,13 @@ export const usePostDetail = () => {
     }
 
     const newPost: Post = { ...post, isPublic: !post?.isPublic };
-    await updatePost(db, newPost);
+    await updatePost(newPost);
     setIsPublic(!isPublic);
     toast("공개설정 변경!");
   };
 
   const handleClickEdit = () => {
-    navigate("/edit/" + postId);
+    navigate.push("/edit/" + postId);
   };
 
   useEffect(() => {
@@ -41,7 +39,7 @@ export const usePostDetail = () => {
   }, [postId]);
 
   useEffect(() => {
-    if (!db || !postId) {
+    if (!postId) {
       return;
     }
 

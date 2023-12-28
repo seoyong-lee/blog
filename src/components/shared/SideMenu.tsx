@@ -1,10 +1,11 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { IoIosClose } from "@react-icons/all-files/io/IoIosClose";
-import { Link } from "react-router-dom";
+import { IoIosClose } from "react-icons/io";
+
 import ButtonTheme from "./ButtonTheme";
 import { useRecoilState } from "recoil";
-import { isLoginStateAtom } from "~/recoil/user";
+import { isLoginStateAtom } from "@/recoil/user";
+import Link from "next/link";
 
 const SideMenu = ({
   isOpen,
@@ -57,21 +58,21 @@ const SideMenu = ({
                 </div>
                 <div className="flex flex-col w-full place-items-center gap-3 mt-20">
                   <Link
-                    to={"/"}
+                    href={"/"}
                     onClick={onClickMenu}
                     className="text-2xl font-semibold  hover:opacity-50"
                   >
                     Posts
                   </Link>
                   <Link
-                    to={"/archive"}
+                    href={"/archive"}
                     onClick={onClickMenu}
                     className="text-2xl font-semibold  hover:opacity-50"
                   >
                     Archive
                   </Link>
                   <Link
-                    to={"/about"}
+                    href={"/about"}
                     onClick={onClickMenu}
                     className="text-2xl font-semibold  hover:opacity-50"
                   >
@@ -79,7 +80,7 @@ const SideMenu = ({
                   </Link>
                   {showLoginButton && (
                     <Link
-                      to={"/login"}
+                      href={"/login"}
                       className="text-2xl font-semibold text-primary hover:opacity-50"
                     >
                       Login
@@ -87,7 +88,7 @@ const SideMenu = ({
                   )}
                   {isLogin && (
                     <Link
-                      to={"/temporary"}
+                      href={"/temporary"}
                       onClick={onClickMenu}
                       className="text-2xl font-semibold text-accent hover:opacity-50"
                     >

@@ -15,7 +15,7 @@ import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import Markdown from "react-markdown";
 import { useRecoilState } from "recoil";
-import { themeStateAtom } from "~/recoil/common";
+import { themeStateAtom } from "@/recoil/common";
 
 const PostDetailMarkdown = ({ markdown }: { markdown?: string }) => {
   const [theme] = useRecoilState(themeStateAtom);

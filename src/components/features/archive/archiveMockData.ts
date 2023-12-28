@@ -1,4 +1,4 @@
-import { Post } from "~/types/scheme";
+import { Post } from "@/types/scheme";
 
 export const archiveMockData: { [year: string]: { [month: string]: Post[] } } =
   {

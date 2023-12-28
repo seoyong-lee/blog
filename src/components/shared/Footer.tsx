@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -6,11 +6,11 @@ const Footer = () => {
       <aside>
         <p className="text-[12px] sm:text-sm">
           © 2023 Drew Lee Powered by{" "}
-          <Link className="underline" to={"https://vitejs.dev/"}>
+          {/* <Link className="underline" href={"https://vitejs.dev/"}>
             Vite
           </Link>{" "}
-          &{" "}
-          <Link className="underline" to="https://daisyui.com/">
+          &{" "} */}
+          <Link className="underline" href="https://daisyui.com/">
             daisyUI
           </Link>
         </p>

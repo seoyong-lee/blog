@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { isLoginStateAtom } from "~/recoil/user";
+import { isLoginStateAtom } from "@/recoil/user";
 
 const PostDetailHeader = ({
   title,

@@ -1,30 +1,30 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+
 import PostItem from "./PostItem";
 import { useEffect } from "react";
-import { getPosts } from "~/services/post";
-import { useFirestore } from "~/lib/firebase";
-import Loading from "~/components/shared/Loading";
+import { getPosts } from "@/services/post";
+import Loading from "@/components/shared/Loading";
 import { useRecoilState } from "recoil";
-import { postListAtom } from "~/recoil/post";
+import { postListAtom } from "@/recoil/post";
+import { useRouter } from "next/navigation";
 
 const PostList = () => {
-  const navigate = useNavigate();
-  const db = useFirestore();
+  const navigate = useRouter();
 
   const [posts, setPosts] = useRecoilState(postListAtom);
 
   const handleClickProfile = (author: string) => {
     if (author === "me") {
-      navigate("/about");
+      navigate.push("/about");
     }
   };
 
   const handleClickItem = (postId: string) => {
-    navigate(`/post/${postId}`);
+    navigate.push(`/post/${postId}`);
   };
 
   const getAndSetPosts = async () => {
-    const postList = await getPosts(db);
+    const postList = await getPosts();
     if (!postList) {
       return;
     }

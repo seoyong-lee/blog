@@ -1,13 +1,36 @@
-import MDEditor from "@uiw/react-md-editor";
+import "@uiw/react-markdown-preview/markdown.css";
+import "@uiw/react-md-editor/markdown-editor.css";
+
+import dynamic from "next/dynamic";
+
+const MDEditor = dynamic(
+  () => import("@uiw/react-md-editor").then((mod) => mod.default),
+  { ssr: false }
+);
+const EditerMarkdown = dynamic(
+  () =>
+    import("@uiw/react-md-editor").then((mod) => {
+      return mod.default.Markdown;
+    }),
+  { ssr: false }
+);
+const MarkdownPrev = dynamic(
+  () => import("@uiw/react-markdown-preview").then((mod) => mod.default),
+  { ssr: false }
+);
+
+// import "@uiw/react-markdown-preview/markdown.css";
+// import "@uiw/react-md-editor/markdown-editor.css";
+
 import { useEffect, useRef, useState } from "react";
-import { HeadMeta } from "~/components/shared/Head";
+import { HeadMeta } from "@/components/shared/Head";
 
 import Markdown from "react-markdown";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { showHeaderAtom, themeStateAtom } from "~/recoil/common";
+import { showHeaderAtom, themeStateAtom } from "@/recoil/common";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { oneLight } from "react-syntax-highlighter/dist/cjs/styles/prism";
@@ -19,21 +42,20 @@ import { base16AteliersulphurpoolLight } from "react-syntax-highlighter/dist/cjs
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import dayjs from "dayjs";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useFirestore } from "~/lib/firebase";
-import { addPost, getPostByPostId, updatePost } from "~/services/post";
-import { Post } from "~/types/scheme";
-import { multilineToSingleline, singlelineToMultiline } from "~/utils/markdown";
-import { showToastStateAtom, toastTextStateAtom } from "~/recoil/toast";
+import { addPost, getPostByPostId, updatePost } from "@/services/post";
+import { Post } from "@/types/scheme";
+import { multilineToSingleline, singlelineToMultiline } from "@/utils/markdown";
+import { showToastStateAtom, toastTextStateAtom } from "@/recoil/toast";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { customAlphabet } from "nanoid";
-import { isLoginStateAtom } from "~/recoil/user";
+import { isLoginStateAtom } from "@/recoil/user";
+import { useRouter } from "next/router";
 
 function PageEdit() {
-  const pathname = useLocation().pathname;
+  const navigate = useRouter();
+  const pathname = navigate.pathname;
   const postId = pathname.split("/edit/")?.[1];
-  const navigate = useNavigate();
-  const db = useFirestore();
+
   const storage = getStorage();
 
   const [isLogin] = useRecoilState(isLoginStateAtom);
@@ -67,16 +89,16 @@ function PageEdit() {
     theme === "nord"
       ? nord
       : theme === "forest"
-        ? darcula
-        : theme === "light"
-          ? base16AteliersulphurpoolLight
-          : theme === "sunset"
-            ? oneDark
-            : theme === "winter"
-              ? oneLight
-              : theme === "night"
-                ? nightOwl
-                : nightOwl;
+      ? darcula
+      : theme === "light"
+      ? base16AteliersulphurpoolLight
+      : theme === "sunset"
+      ? oneDark
+      : theme === "winter"
+      ? oneLight
+      : theme === "night"
+      ? nightOwl
+      : nightOwl;
 
   const saveImgFile = () => {
     const file = imgRef?.current?.files?.[0];
@@ -97,7 +119,7 @@ function PageEdit() {
       return;
     }
 
-    const postData = await getPostByPostId(db, postId);
+    const postData = await getPostByPostId(postId);
 
     setPost(postData?.[0]);
   };
@@ -105,9 +127,9 @@ function PageEdit() {
   const handleClickBack = () => {
     setShowHeader(true);
     if (post?.isPublic) {
-      navigate("/");
+      navigate.push("/");
     } else {
-      navigate("/temporary");
+      navigate.push("/temporary");
     }
   };
 
@@ -133,13 +155,13 @@ function PageEdit() {
         updatedAt: Date.now(),
       } as Post;
 
-      await updatePost(db, post);
+      await updatePost(post);
 
       setIsShowToast(true);
       setToastText("게시완료!");
       setShowHeader(true);
       setLoading(false);
-      navigate("/post/" + postId);
+      navigate.push("/post/" + postId);
     } catch (e) {
       console.log(e);
     } finally {
@@ -184,7 +206,7 @@ function PageEdit() {
                   updatedAt: Date.now(),
                 } as Post;
 
-                await updatePost(db, post);
+                await updatePost(post);
 
                 setIsShowToast(true);
                 setToastText("저장완료!");
@@ -215,7 +237,7 @@ function PageEdit() {
             updatedAt: Date.now(),
           } as Post;
 
-          await updatePost(db, post);
+          await updatePost(post);
 
           setIsShowToast(true);
           setToastText("저장완료!");
@@ -257,12 +279,12 @@ function PageEdit() {
                 updatedAt: Date.now(),
               } as Post;
 
-              await addPost(db, post);
+              await addPost(post);
 
               setIsShowToast(true);
               setToastText("저장완료!");
               setLoading(false);
-              navigate("/edit/" + newPostId);
+              navigate.push("/edit/" + newPostId);
             }
           });
         });
@@ -292,7 +314,7 @@ function PageEdit() {
 
   useEffect(() => {
     if (!isLogin) {
-      navigate("/");
+      navigate.push("/");
     }
   }, [isLogin]);
 

@@ -1,6 +1,6 @@
 import TemporaryPostList from "./TemporaryPostList";
 import TemporaryPostsHeader from "./TemporaryPostsHeader";
-import { useTemporaryPosts } from "~/components/hooks/useTemporaryPosts";
+import { useTemporaryPosts } from "@/components/hooks/useTemporaryPosts";
 
 const TemporaryPostsMain = () => {
   const {

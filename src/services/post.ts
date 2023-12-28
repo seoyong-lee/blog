@@ -1,7 +1,6 @@
 import {
   getDoc,
   doc,
-  Firestore,
   getDocs,
   collection,
   setDoc,
@@ -13,9 +12,10 @@ import {
   orderBy,
 } from "firebase/firestore";
 
-import { Post } from "~/types/scheme";
+import { Post } from "@/types/scheme";
+import { db } from "@/firebase/firebaseClient";
 
-export const getPost = async (db: Firestore, postId: string) => {
+export const getPost = async (postId: string) => {
   try {
     const postDoc = await getDoc(doc(db, "Posts", postId));
     return postDoc.data() as Post;
@@ -24,7 +24,7 @@ export const getPost = async (db: Firestore, postId: string) => {
   }
 };
 
-export const getPostByPostId = async (db: Firestore, postId: string) => {
+export const getPostByPostId = async (postId: string) => {
   try {
     const res: Post[] = [];
     const postRef = collection(db, "Posts");
@@ -40,7 +40,7 @@ export const getPostByPostId = async (db: Firestore, postId: string) => {
   }
 };
 
-export const addPost = async (db: Firestore, post: Post) => {
+export const addPost = async (post: Post) => {
   try {
     const postRef = doc(db, "Posts", post.id);
     const res = await setDoc(postRef, post);
@@ -50,7 +50,7 @@ export const addPost = async (db: Firestore, post: Post) => {
   }
 };
 
-export const updatePost = async (db: Firestore, post: Post) => {
+export const updatePost = async (post: Post) => {
   try {
     const postRef = doc(db, "Posts", post.id);
     const res = await updateDoc(postRef, post as DocumentData);
@@ -60,7 +60,7 @@ export const updatePost = async (db: Firestore, post: Post) => {
   }
 };
 
-export const getPosts = async (db: Firestore) => {
+export const getPosts = async () => {
   try {
     const postRef = collection(db, "Posts");
 
@@ -81,7 +81,7 @@ export const getPosts = async (db: Firestore) => {
   }
 };
 
-export const getTemporaryPosts = async (db: Firestore) => {
+export const getTemporaryPosts = async () => {
   try {
     const postRef = collection(db, "Posts");
 
@@ -102,7 +102,7 @@ export const getTemporaryPosts = async (db: Firestore) => {
   }
 };
 
-export const deletePost = async (db: Firestore, postId: string) => {
+export const deletePost = async (postId: string) => {
   try {
     const postRef = doc(db, "Posts", postId);
     const res = await deleteDoc(postRef);

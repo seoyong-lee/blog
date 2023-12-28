@@ -1,8 +1,9 @@
-import { getDoc, doc, Firestore } from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 
-import { User } from "~/types/scheme";
+import { User } from "@/types/scheme";
+import { db } from "@/firebase/firebaseClient";
 
-export const getUser = async (db: Firestore, userId: string) => {
+export const getUser = async (userId: string) => {
   try {
     const userDoc = await getDoc(doc(db, "Users", userId));
     return userDoc.data() as User;

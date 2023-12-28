@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { themeStateAtom } from "~/recoil/common";
+import { themeStateAtom } from "@/recoil/common";
 
 const ButtonTheme = ({ onClickAdmin }: { onClickAdmin: () => void }) => {
   const setTheme = useSetRecoilState(themeStateAtom);

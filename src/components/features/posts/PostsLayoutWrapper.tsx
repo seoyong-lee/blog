@@ -1,6 +1,8 @@
+"use client";
+
 import { ReactNode, useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { headerFixedStateAtom } from "~/recoil/common";
+import { headerFixedStateAtom } from "@/recoil/common";
 
 const PostsLayoutWrapper = ({ children }: { children: ReactNode }) => {
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);

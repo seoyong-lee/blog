@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { User } from "~/types/scheme";
+import { User } from "@/types/scheme";
 
 export const isLoginStateAtom = atom<boolean>({
   key: "isLoginStateAtom",
