@@ -8,4 +8,8 @@ export default defineConfig({
     sourcemap: false,
   },
   plugins: [react(), tsconfigPaths()],
+  ssgOptions: {
+    script: "sync",
+    includeAllRoutes: true,
+  },
 });
