@@ -9,4 +9,9 @@ export default defineConfig({
     sourcemap: false,
   },
   plugins: [react(), vercel(), tsconfigPaths()],
+  vercel: {
+    config: {
+      routes: [{ src: "/[^.]+", dest: "/" }],
+    },
+  },
 });
