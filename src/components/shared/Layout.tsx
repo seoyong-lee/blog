@@ -80,10 +80,6 @@ const Layout = () => {
     });
   }, []);
 
-  if (!hasMounted) {
-    return null;
-  }
-
   return (
     <Theme>
       <div
