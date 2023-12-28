@@ -7,12 +7,14 @@ import { postListAtom } from "~/recoil/post";
 import dayjs from "dayjs";
 import { Post } from "~/types/scheme";
 import { useNavigate } from "react-router-dom";
+import { useWindowSize } from "../hooks/useWindowSize";
 interface PostByDate {
   [year: string]: { [month: string]: Post[] };
 }
 
 function PageArchive() {
   const navigate = useNavigate();
+  const { height } = useWindowSize();
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
   const [posts] = useRecoilState(postListAtom);
   const [postsByDate, setPostsByDate] = useState<PostByDate>();
@@ -47,7 +49,10 @@ function PageArchive() {
   return (
     <>
       <HeadMeta title={"Archive"}></HeadMeta>
-      <div className="flex flex-col max-w-[780px] w-full min-h-screen h-full px-4 sm:px-10 lg:py-0 pt-12">
+      <div
+        className="flex flex-col max-w-[780px] w-full h-full px-4 sm:px-10 lg:py-0 pt-12"
+        style={{ minHeight: height - 128 }}
+      >
         <TitleHeader title={"Archive"} />
         <section className="px-2">
           {postsByDate ? (

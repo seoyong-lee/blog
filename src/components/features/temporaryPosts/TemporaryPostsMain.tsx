@@ -1,3 +1,4 @@
+import { useWindowSize } from "~/components/hooks/useWindowSize";
 import TemporaryPostList from "./TemporaryPostList";
 import TemporaryPostsHeader from "./TemporaryPostsHeader";
 import { useTemporaryPosts } from "~/components/hooks/useTemporaryPosts";
@@ -11,9 +12,13 @@ const TemporaryPostsMain = () => {
     handleClickItem,
     handleClickProfile,
   } = useTemporaryPosts();
+  const { height } = useWindowSize();
 
   return (
-    <div className="h-full min-h-screen w-full max-w-[1040px] px-6 sm:px-10 lg:py-0 pt-12">
+    <div
+      className="h-full min-h-screen w-full max-w-[1040px] px-6 sm:px-10 lg:py-0 pt-12"
+      style={{ minHeight: height - 128 }}
+    >
       <TemporaryPostsHeader onClickNewPost={handleClickNewPost} />
       <TemporaryPostList
         posts={posts}

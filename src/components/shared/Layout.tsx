@@ -78,7 +78,7 @@ const Layout = () => {
 
   return (
     <Theme dataTheme={theme!}>
-      <div className="w-full h-full flex flex-col place-items-center overflow-x-hidden">
+      <div className="w-full flex flex-col place-items-center mb-[-300px] overflow-x-hidden">
         {showHeader && <Header />}
         <Suspense fallback={<Loading />}>
           <Outlet />

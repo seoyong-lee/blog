@@ -19,7 +19,7 @@ const PostDetailMainImg = ({
         <img
           src={imgUrl}
           alt="post main img"
-          className="object-cover md:rounded-xl max-h-[16rem] sm:max-h-[24rem] w-full h-full"
+          className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full h-full"
         />
       </picture>
 
