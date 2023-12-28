@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const removeImports = require("next-remove-imports");
+const { hostname } = require("os");
 
 module.exports = removeImports()({
   webpack: function (config) {
@@ -15,6 +16,9 @@ module.exports = removeImports()({
     remotePatterns: [
       {
         hostname: "firebasestorage.googleapis.com",
+      },
+      {
+        hostname: "images.unsplash.com",
       },
     ],
   },

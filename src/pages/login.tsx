@@ -42,7 +42,7 @@ function PageLogin() {
             onClick={handleClickGoogleLogin}
           >
             <Image
-              src="google.png"
+              src="/google.png"
               alt="google login"
               width={211}
               height={24}
