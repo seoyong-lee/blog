@@ -84,7 +84,7 @@ const Layout = () => {
   }
 
   return (
-    <Theme dataTheme={theme!}>
+    <Theme>
       <div
         className="w-full flex flex-col place-items-center overflow-x-hidden"
         style={{
