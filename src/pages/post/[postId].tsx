@@ -18,7 +18,7 @@ const PagePostDetail = ({ initialPost }: { initialPost: Post }) => {
       <HeadMeta
         title={post?.title ?? "Post"}
         description={post?.desc}
-        thumbnail={post?.imgUrl}
+        thumbnail={post?.ogImgUrl ?? post?.imgUrl}
       />
       <PostDetailWrapper>
         <PostDetailHeader
