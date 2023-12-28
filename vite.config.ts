@@ -10,8 +10,6 @@ export default defineConfig({
   },
   plugins: [react(), vercel(), tsconfigPaths()],
   vercel: {
-    config: {
-      routes: [{ src: "/[^.]+", dest: "/" }],
-    },
+    rewrites: [{ source: "/[^.]+", destination: "/" }],
   },
 });
