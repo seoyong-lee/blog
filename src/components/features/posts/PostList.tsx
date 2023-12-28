@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 const PostList = () => {
   const navigate = useRouter();
 
-  const [posts, setPosts] = useRecoilState(postListAtom);
+  const [posts] = useRecoilState(postListAtom);
 
   const handleClickProfile = (author: string) => {
     if (author === "me") {
@@ -22,18 +22,6 @@ const PostList = () => {
   const handleClickItem = (postId: string) => {
     navigate.push(`/post/${postId}`);
   };
-
-  const getAndSetPosts = useCallback(async () => {
-    const postList = await getPosts();
-    if (!postList) {
-      return;
-    }
-    setPosts(postList);
-  }, [setPosts]);
-
-  useEffect(() => {
-    getAndSetPosts();
-  }, [getAndSetPosts]);
 
   if (!posts) {
     return <Loading />;
