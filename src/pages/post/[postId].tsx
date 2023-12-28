@@ -53,6 +53,11 @@ export const getStaticPaths = (async () => {
           postId: "5047110781",
         },
       },
+      {
+        params: {
+          postId: "1544384282",
+        },
+      },
     ],
     fallback: true,
   };

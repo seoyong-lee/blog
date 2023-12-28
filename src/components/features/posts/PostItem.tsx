@@ -35,7 +35,9 @@ const PostItem = ({
         </figure>
         <div className="card-body min-h-[15rem] mb-2">
           <h2 className="card-title text-2xl font-bold">{post?.title}</h2>
-          <p className="text-base leading-6">{post?.desc}</p>
+          <p className="text-base leading-6 font-medium opacity-70">
+            {post?.desc}
+          </p>
           <br />
           <div className="flex gap-9 place-items-center">
             <button
