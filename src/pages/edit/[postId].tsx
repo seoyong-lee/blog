@@ -22,7 +22,7 @@ const MarkdownPrev = dynamic(
 // import "@uiw/react-markdown-preview/markdown.css";
 // import "@uiw/react-md-editor/markdown-editor.css";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { HeadMeta } from "@/components/shared/Head";
 
 import Markdown from "react-markdown";
@@ -54,8 +54,7 @@ import Image from "next/image";
 
 function PageEdit() {
   const navigate = useRouter();
-  const pathname = navigate.pathname;
-  const postId = pathname.split("/edit/")?.[1];
+  const postId = navigate.query.postId as string;
 
   const storage = getStorage();
 
@@ -115,7 +114,7 @@ function PageEdit() {
 
   const date = dayjs(dateValue as Date).format("MMMM DD, YYYY");
 
-  const getPostData = async () => {
+  const getPostData = useCallback(async () => {
     if (!postId) {
       return;
     }
@@ -123,7 +122,7 @@ function PageEdit() {
     const postData = await getPostByPostId(postId);
 
     setPost(postData?.[0]);
-  };
+  }, [postId]);
 
   const handleClickBack = () => {
     setShowHeader(true);
@@ -440,10 +439,12 @@ function PageEdit() {
               <figure>
                 <picture>
                   {imgUrl && (
-                    <img
+                    <Image
+                      width={800}
+                      height={400}
                       src={imgUrl}
                       alt="post main img"
-                      className="object-cover md:rounded-xl max-h-[16rem] sm:max-h-[24rem] w-full h-full"
+                      className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[21rem] w-full h-full"
                     />
                   )}
                 </picture>

@@ -25,7 +25,7 @@ const PostDetailMainImg = ({
           unoptimized
           priority
           alt="post main img"
-          className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full h-full"
+          className="object-cover h-auto md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full"
         />
       </picture>
 
