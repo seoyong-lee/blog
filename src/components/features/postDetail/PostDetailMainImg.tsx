@@ -19,9 +19,11 @@ const PostDetailMainImg = ({
       <picture>
         <Image
           src={imgUrl}
-          width={300}
-          height={200}
+          width={700}
+          height={340}
           quality={100}
+          unoptimized
+          priority
           alt="post main img"
           className="object-cover md:rounded-xl max-h-[14rem] sm:max-h-[24rem] w-full h-full"
         />

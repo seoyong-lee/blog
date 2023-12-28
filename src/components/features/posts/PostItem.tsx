@@ -27,6 +27,8 @@ const PostItem = ({
             width={200}
             height={300}
             quality={100}
+            unoptimized
+            priority
             alt="post thumbnail"
             className="h-full w-full object-cover"
           />
