@@ -17,7 +17,7 @@ function Page404() {
       <HeadMeta title={"The page is not found"}></HeadMeta>
       <div
         className="flex flex-col place-items-center justify-center text-center text-3xl w-full font-bold"
-        style={{ minHeight: height - 128 }}
+        style={{ minHeight: height / 2 }}
       >
         <h1>The page is not found.</h1>
         <div className="mt-4">

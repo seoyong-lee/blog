@@ -9,7 +9,6 @@ const provider = new GoogleAuthProvider();
 function PageLogin() {
   const auth = getAuth();
   const navigate = useNavigate();
-  const { height } = useWindowSize();
 
   const handleClickGoogleLogin = () => {
     signInWithPopup(auth, provider)
@@ -35,10 +34,7 @@ function PageLogin() {
   return (
     <>
       <HeadMeta title={"Login"}></HeadMeta>
-      <div
-        className="flex flex-col max-w-[780px] w-full px-6 sm:px-10 lg:py-0 pt-12"
-        style={{ minHeight: height - 128 }}
-      >
+      <div className="flex flex-col max-w-[780px] w-full px-6 sm:px-10 lg:py-0 pt-12">
         <TitleHeader title={"Login"} />
         <section className="w-full h-40 flex flex-col justify-center place-items-center">
           <button

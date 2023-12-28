@@ -4,11 +4,8 @@ import SocialButtons from "../features/about/SocialButtons";
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import { headerFixedStateAtom } from "~/recoil/common";
-import { useWindowSize } from "../hooks/useWindowSize";
-
 function PageAbout() {
   const setHeaderFixed = useSetRecoilState(headerFixedStateAtom);
-  const { height } = useWindowSize();
 
   useEffect(() => {
     setHeaderFixed(false);
@@ -17,10 +14,7 @@ function PageAbout() {
   return (
     <>
       <HeadMeta title={"About"}></HeadMeta>
-      <div
-        className="flex flex-col max-w-[780px] px-6 sm:px-10 lg:py-0 pt-12"
-        style={{ minHeight: height - 128 }}
-      >
+      <div className="flex flex-col max-w-[780px] px-6 sm:px-10 lg:py-0 pt-12">
         <div className="flex flex-col sm:flex-row mt-14 place-items-center">
           <div className="avatar w-[150px] h-[150px] rounded-full mb-10 sm:mb-0 overflow-hidden">
             <img

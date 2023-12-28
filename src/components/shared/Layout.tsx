@@ -9,13 +9,20 @@ import { useFirestore } from "~/lib/firebase";
 import { isLoginStateAtom, currentUserAtom } from "~/recoil/user";
 import { getUser } from "~/services/auth";
 
-import { showHeaderAtom, themeStateAtom } from "~/recoil/common";
+import {
+  headerFixedStateAtom,
+  showHeaderAtom,
+  themeStateAtom,
+} from "~/recoil/common";
 import Toast from "./Toast";
 import Loading from "./Loading";
+import { useWindowSize } from "../hooks/useWindowSize";
 
 const Layout = () => {
   const db = useFirestore();
+  const { height } = useWindowSize();
   const [user, setUser] = useRecoilState(currentUserAtom);
+  const [headerFixed] = useRecoilState(headerFixedStateAtom);
   const [isLogin, setIsLogin] = useRecoilState(isLoginStateAtom);
   const [theme, setTheme] = useRecoilState(themeStateAtom);
   const [showHeader] = useRecoilState(showHeaderAtom);
@@ -78,14 +85,20 @@ const Layout = () => {
 
   return (
     <Theme dataTheme={theme!}>
-      <div className="w-full flex flex-col place-items-center mb-[-300px] overflow-x-hidden">
+      <div
+        className="w-full flex flex-col place-items-center overflow-x-hidden"
+        style={{
+          overflowY: headerFixed ? "hidden" : "auto",
+          minHeight: height - 136,
+        }}
+      >
         {showHeader && <Header />}
         <Suspense fallback={<Loading />}>
           <Outlet />
         </Suspense>
-        <Footer />
         <Toast />
       </div>
+      <Footer />
     </Theme>
   );
 };
