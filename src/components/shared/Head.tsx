@@ -25,7 +25,7 @@ export const HeadMeta = ({ title, description, thumbnail }: Props) => (
     <meta property="og:image:height" content="400" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="original" data-rh="true" />
+    <meta name="twitter:title" content={title} />
     <meta
       name="twitter:description"
       content={description ? description : "drew's blog"}

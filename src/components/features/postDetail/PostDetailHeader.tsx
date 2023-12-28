@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { isLoginStateAtom } from "@/recoil/user";
+import Image from "next/image";
 
 const PostDetailHeader = ({
   title,
@@ -25,7 +26,13 @@ const PostDetailHeader = ({
         <div className="flex place-items-center cursor-pointer">
           <div className="avatar mr-4">
             <div className="w-11 rounded-full overflow-hidden">
-              <img src="/me.png" alt="avatar" className="object-contain" />
+              <Image
+                width={100}
+                height={100}
+                src="/me.png"
+                alt="avatar"
+                className="object-contain"
+              />
             </div>
           </div>
           <div className="flex justify-between w-full">
