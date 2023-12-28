@@ -52,7 +52,7 @@ const TemporaryPostItem = ({
                     <Image
                       width={100}
                       height={100}
-                      src="me.png"
+                      src="/me.png"
                       alt="avatar"
                       className="object-contain"
                     />
