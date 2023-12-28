@@ -10,7 +10,7 @@ import RecoilRootWrapper from "../contexts/RecoilRootWrapper";
 setupFirebase();
 
 const IndexScreen = lazy(() => import("../screens/Index"));
-const PagePostDetail = lazy(() => import("../screens/post/[postId]"));
+// const PagePostDetail = lazy(() => import("../screens/post/[postId]"));
 const PageArchiveScreen = lazy(() => import("../screens/Archive"));
 const PageAboutScreen = lazy(() => import("../screens/About"));
 const PageLoginScreen = lazy(() => import("../screens/Login"));
@@ -71,7 +71,8 @@ export const routes: RouteRecord[] = [
       },
       {
         path: "/post/:postId",
-        element: <PagePostDetail />,
+        // element: <PagePostDetail />,
+        Component: lazy(() => import("../screens/post/[postId]")),
         entry: "src/screens/post/[postId].tsx",
         getStaticPaths: () => ["post/5047110781"],
       },
