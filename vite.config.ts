@@ -9,6 +9,6 @@ export default defineConfig({
   },
   plugins: [react(), tsconfigPaths()],
   ssgOptions: {
-    script: "async",
+    script: "sync",
   },
 });

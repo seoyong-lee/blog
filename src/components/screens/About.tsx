@@ -15,7 +15,7 @@ function PageAbout() {
   return (
     <>
       <HeadMeta title={"About"}></HeadMeta>
-      <div className="flex flex-col max-w-[780px] xl:min-h-[calc(100vh-124px)] min-h-[calc(100vh-68px)] px-6 sm:px-10 lg:py-0 pt-12">
+      <div className="flex flex-col max-w-[780px] min-h-screen px-6 sm:px-10 lg:py-0 pt-12">
         <div className="flex flex-col sm:flex-row mt-14 place-items-center">
           <div className="avatar w-[150px] h-[150px] rounded-full mb-10 sm:mb-0 overflow-hidden">
             <img
