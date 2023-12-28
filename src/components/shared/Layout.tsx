@@ -1,3 +1,4 @@
+import { Head } from "vite-react-ssg";
 import { Theme } from "react-daisyui";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
@@ -85,6 +86,20 @@ const Layout = () => {
 
   return (
     <Theme>
+      <Head>
+        <title>{`Drew.log`}</title>
+        <meta name="description" content={"drew's blog"} />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <meta property="og:title" content={`Drew.log`} />
+        <meta property="og:description" content={"drew's blog"} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.drewww.dev/" />
+
+        <meta property="og:image" content={"/og.png"} />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="400" />
+      </Head>
       <div
         className="w-full flex flex-col place-items-center overflow-x-hidden"
         style={{
