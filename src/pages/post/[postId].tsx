@@ -8,10 +8,15 @@ import { usePostDetail } from "../../components/hooks/usePostDetail";
 import { getPost } from "@/services/post";
 import { Post } from "@/types/scheme";
 import { GetStaticPaths } from "next";
+import { useRouter } from "next/router";
 
 const PagePostDetail = ({ initialPost }: { initialPost: Post }) => {
   const { post, isPublic, date, replacedText, onClickPublish, onClickEdit } =
     usePostDetail(initialPost);
+
+  const router = useRouter();
+
+  const url = "https://www.drewww.dev" + router.asPath;
 
   return (
     <Fragment>
@@ -19,6 +24,7 @@ const PagePostDetail = ({ initialPost }: { initialPost: Post }) => {
         title={post?.title ?? "Post"}
         description={post?.desc}
         thumbnail={post?.ogImgUrl ?? post?.imgUrl}
+        url={url}
       />
       <PostDetailWrapper>
         <PostDetailHeader
