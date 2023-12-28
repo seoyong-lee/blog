@@ -1,4 +1,4 @@
-import { Head } from "~/components/shared/Head";
+import { HeadMeta } from "~/components/shared/Head";
 import TitleHeader from "../shared/TitleHeader";
 import { Fragment, useEffect, useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -46,7 +46,7 @@ function PageArchive() {
 
   return (
     <>
-      <Head title={"Archive"}></Head>
+      <HeadMeta title={"Archive"}></HeadMeta>
       <div className="flex flex-col max-w-[780px] w-full xl:min-h-[calc(100vh-124px)] min-h-[calc(100vh-68px)] h-full px-4 sm:px-10 lg:py-0 pt-12">
         <TitleHeader title={"Archive"} />
         <section className="px-2">

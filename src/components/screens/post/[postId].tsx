@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Head } from "~/components/shared/Head";
+import { HeadMeta } from "~/components/shared/Head";
 import Loading from "../../shared/Loading";
 
 import PostDetailWrapper from "../../features/postDetail/PostDetailWrapper";
@@ -14,11 +14,11 @@ const PagePostDetail = () => {
 
   return post ? (
     <Fragment>
-      <Head
+      <HeadMeta
         title={post?.title ?? "Post"}
         description={post?.desc}
         thumbnail={post?.imgUrl}
-      ></Head>
+      ></HeadMeta>
       <PostDetailWrapper>
         <PostDetailHeader
           title={post?.title ?? "제목없는 글"}

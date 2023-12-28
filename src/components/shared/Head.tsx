@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import { Head } from "vite-react-ssg";
 
 type Props = {
   title: string;
@@ -6,8 +6,8 @@ type Props = {
   thumbnail?: string;
 };
 
-export const Head = ({ title, description, thumbnail }: Props) => (
-  <Helmet>
+export const HeadMeta = ({ title, description, thumbnail }: Props) => (
+  <Head>
     <title>{`${title} | Drew.log`}</title>
     <meta name="description" content={description ?? "drew's blog"} />
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -32,5 +32,5 @@ export const Head = ({ title, description, thumbnail }: Props) => (
     />
     <meta name="twitter:site" content="https://www.drewww.dev/" />
     <meta name="twitter:image" content={thumbnail ? thumbnail : "/og.png"} />
-  </Helmet>
+  </Head>
 );

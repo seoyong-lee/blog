@@ -1,6 +1,6 @@
 import MDEditor from "@uiw/react-md-editor";
 import { useEffect, useRef, useState } from "react";
-import { Head } from "~/components/shared/Head";
+import { HeadMeta } from "~/components/shared/Head";
 
 import Markdown from "react-markdown";
 import Calendar from "react-calendar";
@@ -298,7 +298,7 @@ function PageEdit() {
 
   return (
     <>
-      <Head title={"Editor"}></Head>
+      <HeadMeta title={"Editor"}></HeadMeta>
       <footer className="fixed bottom-0 h-20 w-full bg-base-300 z-10 flex justify-between place-items-center px-10">
         <button
           className="btn btn-active btn-neutral"

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
-import { Head } from "~/components/shared/Head";
+import { HeadMeta } from "~/components/shared/Head";
 import { headerFixedStateAtom } from "~/recoil/common";
 
 function Page404() {
@@ -12,7 +12,7 @@ function Page404() {
 
   return (
     <>
-      <Head title={"The page is not found"}></Head>
+      <HeadMeta title={"The page is not found"}></HeadMeta>
       <div className="flex flex-col place-items-center justify-center text-center h-screen text-3xl w-full font-bold">
         <h1>The page is not found.</h1>
         <div className="mt-4">
